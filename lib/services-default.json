@@ -1,0 +1,8 @@
+{
+  "services": [
+    {
+      "title": "Default Service",
+      "description": "This is a default service description. Please add services in your CMS."
+    }
+  ]
+}

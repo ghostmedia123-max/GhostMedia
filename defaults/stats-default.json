@@ -1,0 +1,16 @@
+{
+  "stats": [
+    {
+      "_id": "default-stat-1",
+      "label": "Projects Completed",
+      "value": "0",
+      "suffix": "+"
+    },
+    {
+      "_id": "default-stat-2",
+      "label": "Happy Clients",
+      "value": "0",
+      "suffix": "%"
+    }
+  ]
+}

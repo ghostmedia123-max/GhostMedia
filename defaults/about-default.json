@@ -1,0 +1,12 @@
+{
+  "headline": "About Our Company",
+  "body": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        { "_type": "span", "text": "Learn more about our mission and our dedicated team. Content coming soon." }
+      ]
+    }
+  ]
+}

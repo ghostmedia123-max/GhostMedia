@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "_id": "default-1",
+      "title": "Default Project One",
+      "image": {
+        "_type": "image",
+        "alt": "A placeholder image for a default project",
+        "asset": {
+          "_ref": "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-2000x3000-jpg",
+          "_type": "reference"
+        }
+      }
+    }
+  ]
+}

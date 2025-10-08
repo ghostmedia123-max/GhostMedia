@@ -1,0 +1,14 @@
+{
+  "email": "contact@example.com",
+  "phone": "123-456-7890",
+  "socialLinks": [
+    {
+      "network": "Facebook",
+      "url": "https://facebook.com"
+    },
+    {
+      "network": "Twitter",
+      "url": "https://twitter.com"
+    }
+  ]
+}
