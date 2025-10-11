@@ -33,7 +33,13 @@ export default function FeaturedPortfolio({ data }: FeaturedPortfolioProps) {
           {data.map((item) => (
             <div key={item._id} className="group">
               <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg">
-                <Image src={urlForImage(item.image).url()} alt={item.image.alt || item.title} layout="fill" objectFit="cover" className="transition-transform duration-300 group-hover:scale-105" />
+                <Image
+                  src={urlForImage(item.image).width(800).height(450).url()}
+                  alt={item.image.alt || item.title || 'Portfolio item image'}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
               <h3 className="mt-4 text-xl font-semibold text-gray-900">{item.title}</h3>
               {item.description && <p className="mt-2 text-gray-600">{item.description}</p>}
