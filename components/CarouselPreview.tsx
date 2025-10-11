@@ -27,7 +27,7 @@ export default function CarouselPreview({ data }: CarouselPreviewProps) {
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <Image
                   src={urlForImage(item.image).width(400).height(400).url()}
-                  alt={item.image.alt}
+                  alt={item.image.alt || item.title || 'Carousel image'}
                   width={400}
                   height={400}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
