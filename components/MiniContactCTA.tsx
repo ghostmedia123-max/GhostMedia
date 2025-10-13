@@ -56,8 +56,10 @@ export default function MiniContactCTA() {
             <motion.rect
               x="1"
               y="1"
-              width="calc(100% - 2px)"
-              height="calc(100% - 2px)"
+              style={{
+                width: 'calc(100% - 2px)',
+                height: 'calc(100% - 2px)',
+              }}
               rx="7" // Corresponds to rounded-lg
               ry="7"
               initial={{ pathLength: 0 }}
