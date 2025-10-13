@@ -3,13 +3,11 @@ import {
   getContentHeroData,
   getTopCarouselData,
   getServicesData,
-  getServicesSectionData,
   getGallerySectionData,
   getGalleryItems,
 } from '@/lib/data';
 import { HeroData, CarouselData, Service, GalleryItem, GallerySectionData, SanitySeo } from '@/lib/types';
 import Carousel from '@/components/Carousel';
-import DetailedServicesGrid from '@/components/DetailedServicesGrid';
 import Hero from '@/components/Hero';
 import PortfolioGallery from '@/components/PortfolioGallery';
 
@@ -36,11 +34,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContentPage() {
   // Fetch all data concurrently for performance
-  const [contentHeroData, topCarouselData, servicesSectionData, services, galleryItems, gallerySectionData] = await Promise.all([
+  const [contentHeroData, topCarouselData, galleryItems, gallerySectionData] = await Promise.all([
     getContentHeroData(),
     getTopCarouselData(),
-    getServicesSectionData(),
-    getServicesData(),
     getGalleryItems(),
     getGallerySectionData(),
   ]);
@@ -56,9 +52,6 @@ export default async function ContentPage() {
 
         {/* Portfolio Gallery Section */}
         <PortfolioGallery sectionData={gallerySectionData} items={galleryItems as GalleryItem[]} />
-
-        {/* Services Section */}
-        <DetailedServicesGrid sectionData={servicesSectionData} services={services || []} />
       </main>
       </div>
     </div>

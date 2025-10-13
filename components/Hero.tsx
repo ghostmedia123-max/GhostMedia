@@ -57,7 +57,7 @@ export default function Hero({data}: HeroProps) {
           src={urlFor(data.backgroundImage).url()}
           alt={data.backgroundImage.alt || 'Hero background image'}
           fill
-          className="object-cover"
+          className="object-cover w-full h-full"
           priority
         />
       )}
@@ -95,9 +95,9 @@ export default function Hero({data}: HeroProps) {
               <Image
                 src={urlFor(data.logo).width(400).height(400).url()}
                 alt={data.logo.alt || 'Company Logo'}
-                width={200}
-                height={200}
-                className="h-48 w-48 object-contain md:h-auto md:w-auto md:w-[400px] md:h-[400px]"
+                width={400}
+                height={400}
+                className="h-48 w-48 object-contain md:h-[400px] md:w-[400px]"
               />
             </motion.div>
           )}

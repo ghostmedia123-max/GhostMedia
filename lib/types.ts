@@ -57,6 +57,11 @@ export interface Service {
   ctaLink?: string;
 }
 
+export interface ServicesSectionData {
+  title?: string;
+  description?: string;
+}
+
 export interface ContactInfoData {
   mainHeadline?: string;
   subHeadline?: string;
