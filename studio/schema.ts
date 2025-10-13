@@ -16,9 +16,27 @@ import statistics from './schemaTypes/statistics'
 import servicesSection from './schemaTypes/servicesSection'
 import strategySection from './schemaTypes/strategySection'
 import toolsSection from './schemaTypes/toolsSection'
+import detailedStatistics from './schemaTypes/detailedStatistics'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
-    about, aboutHero, contactHero, contactInfo, carousel, contentHero, footer, galleryItem, gallerySection, hero, introduction, portfolioItem, service, servicesSection, statistics, strategySection, toolsSection
+    about,
+    aboutHero,
+    contactHero,
+    contactInfo,
+    carousel,
+    contentHero,
+    footer,
+    galleryItem,
+    gallerySection,
+    hero,
+    introduction,
+    portfolioItem,
+    service,
+    servicesSection,
+    statistics,
+    strategySection,
+    toolsSection,
+    detailedStatistics,
   ],
 }

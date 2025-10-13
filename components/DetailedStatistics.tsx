@@ -8,7 +8,7 @@ import {ArrowTrendingUpIcon} from '@heroicons/react/24/solid'
 interface DetailedStatisticsProps {
   data: {
     title?: string
-    stats: DetailedStat[]
+    stats?: DetailedStat[]
   }
 }
 
@@ -129,6 +129,10 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
 export default function DetailedStatistics({data}: DetailedStatisticsProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, {once: true, amount: 0.1})
+
+  if (!data || !data.stats || data.stats.length === 0) {
+    return null
+  }
 
   return (
     <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
