@@ -75,11 +75,18 @@ export default function Hero({data}: HeroProps) {
               className="relative mb-6 flex-shrink-0 md:mb-0 md:mr-8"
             >
               {/* Animated Border */}
-              <svg className="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg" fill="none">
+              <svg
+                className="absolute inset-0 h-full w-full"
+                width="100%"
+                height="100%"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+              >
                 <motion.circle
-                  cx="50%"
-                  cy="50%"
-                  r="calc(50% - 2px)"
+                  cx="50"
+                  cy="50"
+                  r="48"
                   strokeWidth="4"
                   initial={{ pathLength: 0 }}
                   animate={{

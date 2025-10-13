@@ -86,7 +86,7 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
       })
       secondaryControls.start({
         strokeDashoffset: circumference * (1 - (primary + secondary) / 100),
-        transition: {duration: 1, ease: 'easeOut', delay: 0.5},
+        transition: {duration: 1, ease: 'easeOut'},
       })
     }
   }, [isInView, primary, secondary, circumference, primaryControls, secondaryControls])
@@ -100,12 +100,12 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
           cy="40"
           r={radius}
           fill="transparent"
-          stroke="#3b82f6"
+          stroke="white"
           strokeWidth="8"
           strokeLinecap="round"
           transform="rotate(-90 40 40)"
           strokeDasharray={circumference}
-          animate={secondaryControls}
+          animate={primaryControls}
           initial={{strokeDashoffset: circumference}}
         />
         <motion.circle
@@ -113,12 +113,12 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
           cy="40"
           r={radius}
           fill="transparent"
-          stroke="white"
+          stroke="#3b82f6"
           strokeWidth="8"
           strokeLinecap="round"
           transform="rotate(-90 40 40)"
           strokeDasharray={circumference}
-          animate={primaryControls}
+          animate={secondaryControls}
           initial={{strokeDashoffset: circumference}}
         />
       </svg>
