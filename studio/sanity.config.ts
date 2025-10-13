@@ -5,6 +5,8 @@ import {schema} from './schema'
 import {deskStructure} from './deskStructure'
 import seo from './schemaTypes/seo' // Corrected path
 import page from './schemaTypes/page' // Corrected path
+import detailedStat from './schemaTypes/detailedStat'
+import detailedStatistics from './schemaTypes/detailedStatistics'
 
 export default defineConfig({
   name: 'default',
@@ -18,6 +20,6 @@ export default defineConfig({
   // Add the schema to the config
   schema: {
     // Add the new schemas to the existing types
-    types: [...schema.types, seo, page],
+    types: [...schema.types, seo, page, detailedStat, detailedStatistics],
   },
 })

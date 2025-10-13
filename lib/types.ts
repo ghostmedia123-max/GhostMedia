@@ -150,3 +150,24 @@ export interface CarouselData {
   featureFirstSlide?: boolean;
   slides: CarouselSlide[];
 }
+
+export interface SubStat {
+  _key: string;
+  label: string;
+  value: string;
+}
+
+export interface DetailedStat {
+  _key: string;
+  label: string;
+  mainValue: string;
+  percentageGrowth: number;
+  previousValue?: string;
+  progressRing?: {
+    primaryValue: number;
+    primaryLabel: string;
+    secondaryValue: number;
+    secondaryLabel: string;
+  };
+  subStats?: SubStat[];
+}

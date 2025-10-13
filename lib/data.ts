@@ -335,3 +335,16 @@ export async function getAnalyticsSummary() {
     return { pageviewsLast7Days: 0, pageviewsLast30Days: 0, pageviewsLast90Days: 0, submissionCount: 0 };
   }
 }
+
+export async function getDetailedStatistics() {
+  try {
+    const query = groq`*[_type == "detailedStatistics"][0]{
+      title,
+      stats
+    }`;
+    return await client.fetch(query);
+  } catch (error) {
+    console.error('Failed to fetch detailed statistics:', error);
+    return { title: 'Our Impact', stats: [] };
+  }
+}
