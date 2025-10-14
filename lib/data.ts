@@ -53,7 +53,7 @@ export async function getAboutPage() {
       headline,
       sections,
       seo,
-      detailedStatistics->{
+      "detailedStatistics": detailedStatistics->{
         title,
         stats[]{
           _key,

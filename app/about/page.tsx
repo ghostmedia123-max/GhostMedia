@@ -1,12 +1,18 @@
 import {
   getAboutPage,
-  getAllStatistics,
   getAboutHeroData,
   getServicesSectionData,
   getServicesData,
 } from '@/lib/data';
 import { Metadata } from 'next';
-import { HeroData, SanitySeo, AboutPageData, AboutSection as AboutSectionType, Service, ServicesSectionData, DetailedStat } from '@/lib/types';
+import {
+  HeroData,
+  SanitySeo,
+  AboutPageData,
+  AboutSection as AboutSectionType,
+  Service,
+  ServicesSectionData,
+} from '@/lib/types';
 import Hero from '@/components/Hero';
 
 import AboutSection from '@/components/AboutSection';
