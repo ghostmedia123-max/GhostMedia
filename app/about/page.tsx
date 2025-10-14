@@ -66,7 +66,7 @@ export default async function AboutPage() {
       <DetailedServicesGrid sectionData={servicesSectionData} services={servicesData || []} />
 
       {/* 4. Detailed Statistics Dashboard */}
-      {aboutData?.detailedStatistics && <DetailedStatistics data={aboutData.detailedStatistics} />}
+      <DetailedStatistics data={aboutData?.detailedStatistics} />
     </div>
   );
 }

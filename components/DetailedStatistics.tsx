@@ -130,15 +130,11 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, {once: true, amount: 0.1})
 
-  if (!data || !data.stats || data.stats.length === 0) {
-    return null
-  }
-
   return (
     <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{data.title || 'Our Impact'}</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{data?.title || 'Our Impact'}</h2>
         </div>
 
         <motion.div
@@ -147,7 +143,12 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {data.stats.map(stat => (
+          {!data || !data.stats || data.stats.length === 0 ? (
+            <motion.div variants={itemVariants} className="text-center text-gray-400">
+              <p>Detailed statistics will be displayed here soon.</p>
+            </motion.div>
+          ) : (
+            data.stats.map(stat => (
             <motion.div key={stat._key} variants={itemVariants} className="rounded-xl bg-[#000c49]/50 p-6 ring-1 ring-white/10">
               <div className="flex flex-col gap-y-6 sm:flex-row sm:items-center sm:justify-between sm:gap-x-8">
                 <div className="flex-1">
@@ -182,7 +183,8 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                 </div>
               )}
             </motion.div>
-          ))}
+          ))
+          )}
         </motion.div>
       </div>
     </div>
