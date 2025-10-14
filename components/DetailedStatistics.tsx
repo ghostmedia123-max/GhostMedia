@@ -105,16 +105,13 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
     <motion.div
       ref={ref}
       className="relative h-20 w-20"
-      initial="initial"
-      whileHover={{scale: 1.1}}
-      animate={isInView ? 'hover' : 'initial'}
+      initial="initial" // Sets the initial variant for children
+      whileHover="hover" // On hover, animates children to their "hover" variant
       transition={{type: 'spring', stiffness: 300}}
     >
       <motion.div
         className="absolute inset-0 flex flex-col items-center justify-center"
         variants={ringContentVariants}
-        initial="initial"
-        animate={isInView ? 'initial' : 'hover'} // Start hidden
       >
         <span className="text-xl font-bold text-white">{primary}%</span>
       </motion.div>
