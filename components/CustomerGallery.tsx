@@ -57,17 +57,17 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-8">
                 {gallery.customerName}
               </h2>
-              <div className="grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              <div className="columns-2 gap-2 sm:columns-3 md:columns-4 lg:columns-5">
                 {gallery.mediaItems?.map((item, index) => (
                   <motion.div
                     key={item.asset._ref + index}
                     variants={itemVariants}
                     layoutId={item._key}
                     onClick={() => {
-                      const url = item._type === 'videoItem' ? item.videoUrl : urlFor(item).url()
+                      const url = item._type === 'videoItem' ? item.videoUrl : urlFor(item as SanityImage).url()
                       if (url) setSelectedImg(url)
                     }}
-                    className="aspect-square cursor-pointer overflow-hidden rounded-lg"
+                    className="mb-2 break-inside-avoid cursor-pointer overflow-hidden rounded-lg"
                     whileHover={{scale: 1.05, zIndex: 10}}
                     transition={{type: 'spring', stiffness: 300}}
                   >
@@ -82,7 +82,7 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
                       />
                     ) : (
                       <Image
-                        src={urlFor(item).width(400).height(400).url()}
+                        src={urlFor(item as SanityImage).width(500).url()}
                         alt={item.alt || `Gallery image for ${gallery.customerName}`}
                         width={400}
                         height={400}
