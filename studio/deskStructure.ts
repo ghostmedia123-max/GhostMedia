@@ -64,6 +64,7 @@ export const deskStructure = (S: StructureBuilder) =>
       // Repeatable documents
       S.documentTypeListItem('service').title('Services'),
       S.documentTypeListItem('portfolioItem').title('Portfolio Items'),
+      S.documentTypeListItem('customerGallery').title('Customer Galleries'),
 
       // The rest of the document types, filtered to exclude the singletons
       ...S.documentTypeListItems().filter(
@@ -85,6 +86,7 @@ export const deskStructure = (S: StructureBuilder) =>
             'servicesSection',
             'service',
             'portfolioItem',
+            'customerGallery',
           ].includes(listItem.getId() || ''),
       ),
     ])

@@ -362,3 +362,15 @@ export async function getDetailedStatistics() {
     return { title: 'Our Impact', stats: [] };
   }
 }
+
+export async function getCustomerGalleries() {
+  try {
+    const query = groq`*[_type == "customerGallery"] | order(_createdAt desc) {
+      _id, customerName, mediaItems
+    }`;
+    return await client.fetch(query);
+  } catch (error) {
+    console.error('Failed to fetch customer galleries:', error);
+    return [];
+  }
+}
