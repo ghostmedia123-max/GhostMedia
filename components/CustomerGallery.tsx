@@ -2,9 +2,9 @@
 
 import {CustomerGalleryItem, SanityImage} from '@/lib/types'
 import {urlFor} from '@/lib/client'
-import Image from 'next/image'
-import {motion, useInView} from 'framer-motion'
-import {useRef, useState} from 'react'
+import NextImage from 'next/image'
+import {motion, useInView} from 'framer-motion';
+import {useEffect, useRef, useState} from 'react';
 
 interface CustomerGalleryData {
   _id: string
@@ -32,6 +32,27 @@ const groupVariants = {
 const itemVariants = {
   hidden: {opacity: 0, scale: 0.8},
   visible: {opacity: 1, scale: 1},
+}
+
+function GalleryVideo({src}: {src?: string}) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const isInView = useInView(videoRef, {margin: '0px 0px -50px 0px'})
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isInView) {
+        videoRef.current.play()
+      } else {
+        videoRef.current.pause()
+      }
+    }
+  }, [isInView])
+
+  if (!src) return null
+
+  return (
+    <video ref={videoRef} src={src} className="h-full w-full object-cover" autoPlay loop muted playsInline />
+  )
 }
 
 export default function CustomerGallery({galleries}: CustomerGalleryProps) {
@@ -64,7 +85,7 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
                     variants={itemVariants}
                     layoutId={item._key}
                     onClick={() => {
-                      const url = item._type === 'videoItem' ? item.videoUrl : urlFor(item as SanityImage).url()
+                      const url = item._type === 'videoItem' ? item.videoUrl : urlFor(item as unknown as SanityImage).url()
                       if (url) setSelectedImg(url)
                     }}
                     className="mb-2 break-inside-avoid cursor-pointer overflow-hidden rounded-lg"
@@ -72,21 +93,16 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
                     transition={{type: 'spring', stiffness: 300}}
                   >
                     {item._type === 'videoItem' ? (
-                      <video
-                        src={item.videoUrl}
-                        className="h-full w-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      />
+                      <GalleryVideo src={item.videoUrl} />
                     ) : (
-                      <Image
-                        src={urlFor(item as SanityImage).width(500).url()}
+                      <NextImage
+                        src={urlFor(item as unknown as SanityImage).width(500).url()}
                         alt={item.alt || `Gallery image for ${gallery.customerName}`}
-                        width={400}
-                        height={400}
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        width={500}
+                        height={0} // Set to 0 to allow auto-height based on aspect ratio
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        style={{height: 'auto'}}
                       />
                     )}
                   </motion.div>
