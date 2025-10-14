@@ -97,7 +97,12 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
   }, [isInView, primary, secondary, circumference, primaryControls, secondaryControls])
 
   return (
-    <div ref={ref} className="relative h-20 w-20">
+    <motion.div
+      ref={ref}
+      className="relative h-20 w-20"
+      whileHover={{scale: 1.1}}
+      transition={{type: 'spring', stiffness: 300}}
+    >
       <svg className="h-full w-full" viewBox="0 0 80 80">
         <circle cx="40" cy="40" r={radius} fill="transparent" stroke="#1f2937" strokeWidth="8" />
         <motion.circle
@@ -127,7 +132,7 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
           initial={{strokeDashoffset: circumference}}
         />
       </svg>
-    </div>
+    </motion.div>
   )
 }
 
@@ -204,11 +209,12 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                     {stat.subStats.map(sub => (
                       <motion.div
                         key={sub._key}
-                        whileHover={{scale: 1.1, color: '#60a5fa'}}
+                        whileHover={{scale: 1.1, y: -5}}
+                        transition={{type: 'spring', stiffness: 300}}
                         className="flex flex-col items-center text-center"
                       >
                         <p className="text-sm text-gray-400">{sub.label}</p>
-                        <p className="mt-1 text-xl font-semibold">{sub.value}</p>
+                        <p className="mt-1 text-xl font-semibold text-white">{sub.value}</p>
                       </motion.div>
                     ))}
                   </div>
