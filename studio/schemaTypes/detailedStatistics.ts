@@ -84,7 +84,17 @@ export default defineType({
               title: 'Sub-Statistics',
               type: 'array',
               description: '(Optional) Add up to three smaller sub-stats.',
-              of: [{type: 'detailedStat'}],
+              of: [
+                {
+                  name: 'subStat',
+                  title: 'Sub-Statistic',
+                  type: 'object',
+                  fields: [
+                    defineField({name: 'label', type: 'string'}),
+                    defineField({name: 'value', type: 'string'}),
+                  ],
+                },
+              ],
             }),
             defineField({
               name: 'descriptionBoxes',
@@ -97,11 +107,7 @@ export default defineType({
                   name: 'descriptionBox',
                   title: 'Description Box',
                   fields: [
-                    defineField({
-                      name: 'title',
-                      title: 'Title',
-                      type: 'string',
-                    }),
+                    defineField({name: 'title', title: 'Title', type: 'string'}),
                     defineField({name: 'text', title: 'Text', type: 'text'}),
                   ],
                 },
