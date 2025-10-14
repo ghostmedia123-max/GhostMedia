@@ -156,9 +156,9 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   {stat.progressRing && (
                     <div className="flex flex-shrink-0 items-center gap-x-4">
                       <ProgressRing primary={stat.progressRing.primaryValue} secondary={stat.progressRing.secondaryValue} />
-                      <div className="text-sm sm:hidden">
-                        <p className="flex items-center gap-x-2 text-white"><span className="h-2 w-2 rounded-full bg-white"></span>{stat.progressRing.primaryLabel}</p>
-                        <p className="flex items-center gap-x-2 text-gray-400"><span className="h-2 w-2 rounded-full bg-blue-500"></span>{stat.progressRing.secondaryLabel}</p>
+                      <div className="text-sm">
+                        <p className="flex items-center gap-x-2 text-white"><span className="h-2 w-2 rounded-full bg-white"></span> {stat.progressRing.primaryLabel}</p>
+                        <p className="flex items-center gap-x-2 text-gray-400"><span className="h-2 w-2 rounded-full bg-blue-500"></span> {stat.progressRing.secondaryLabel}</p>
                       </div>
                     </div>
                   )}
@@ -186,13 +186,15 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                 )}
               </div>
               {stat.subStats && stat.subStats.length > 0 && (
-                <div className="mt-6 grid grid-cols-1 gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
-                  {stat.subStats.map(sub => (
-                    <div key={sub._key} className="rounded-lg bg-white/5 p-4">
-                      <p className="text-sm text-gray-400">{sub.label}</p>
-                      <p className="mt-1 text-xl font-semibold text-white">{sub.value}</p>
-                    </div>
-                  ))}
+                <div className="mt-6 rounded-lg bg-white/5 p-4 ring-1 ring-inset ring-white/10">
+                  <div className="flex flex-wrap items-center justify-around gap-4">
+                    {stat.subStats.map(sub => (
+                      <div key={sub._key} className="flex flex-col items-center text-center">
+                        <p className="text-sm text-gray-400">{sub.label}</p>
+                        <p className="mt-1 text-xl font-semibold text-white">{sub.value}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </motion.div>
