@@ -49,22 +49,11 @@ export async function getFooterData() {
 export async function getAboutPage() {
   try {
     // Fetches the headline and rich text body for the About page.
-    const query = groq`*[_type == "about"][0]{
+    const query = groq`*[_type == "about"][0] {
       headline,
       sections,
       seo,
-      "detailedStatistics": detailedStatistics->{
-        title,
-        stats[]{
-          _key,
-          label,
-          mainValue,
-          percentageGrowth,
-          previousValue,
-          progressRing,
-          subStats
-        }
-      }
+      detailedStatistics->
     }`;
     const data = await client.fetch(query);
     return data;

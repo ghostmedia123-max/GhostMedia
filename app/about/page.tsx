@@ -10,7 +10,6 @@ import { HeroData, SanitySeo, AboutPageData, AboutSection as AboutSectionType, S
 import Hero from '@/components/Hero';
 
 import AboutSection from '@/components/AboutSection';
-import DetailedServicesGrid from '@/components/DetailedServicesGrid';
 import DetailedStatistics from '@/components/DetailedStatistics';
 export const dynamic = 'force-dynamic';
 
@@ -57,10 +56,10 @@ export default async function AboutPage() {
       ))}
 
       {/* 3. Services Grid */}
-      <DetailedServicesGrid sectionData={servicesSectionData} services={servicesData || []} />
+      {/* <DetailedServicesGrid sectionData={servicesSectionData} services={servicesData || []} /> */}
 
       {/* 4. Detailed Statistics Dashboard */}
-      <DetailedStatistics data={aboutData?.detailedStatistics} />
+      {aboutData?.detailedStatistics && <DetailedStatistics data={aboutData.detailedStatistics} />}
     </div>
   );
 }
