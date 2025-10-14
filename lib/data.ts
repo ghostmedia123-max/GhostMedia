@@ -67,7 +67,7 @@ export async function getAboutPage() {
         }
       }
     }`;
-    const data = await client.fetch(query);
+    const data = await client.fetch(query, {}, {cache: 'no-store'});
     return data;
   } catch (error) {
     console.error('Failed to fetch about page data:', error);
