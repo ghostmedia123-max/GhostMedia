@@ -19,12 +19,18 @@ export default defineType({
       type: 'array',
       of: [
         {
-          name: 'media',
-          title: 'Media',
-          type: 'image', // You can also use a custom object with image and video fields
+          name: 'imageItem',
+          title: 'Image',
+          type: 'image',
           options: {
             hotspot: true,
           },
+        },
+        {
+          name: 'videoItem',
+          title: 'Video',
+          type: 'file',
+          options: {accept: 'video/*'},
         },
       ],
     }),

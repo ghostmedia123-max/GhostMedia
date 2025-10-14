@@ -366,7 +366,12 @@ export async function getDetailedStatistics() {
 export async function getCustomerGalleries() {
   try {
     const query = groq`*[_type == "customerGallery"] | order(_createdAt desc) {
-      _id, customerName, mediaItems
+      _id,
+      customerName,
+      mediaItems[]{
+        ...,
+        "videoUrl": asset->url
+      }
     }`;
     return await client.fetch(query);
   } catch (error) {

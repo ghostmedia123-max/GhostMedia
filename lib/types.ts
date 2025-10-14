@@ -1,5 +1,6 @@
 export interface SanityImage {
   _type: 'image';
+  _key: string;
   asset: {
     _ref: string;
     _type: 'reference';
@@ -178,3 +179,15 @@ export interface DescriptionBox {
   title: string;
   text: string;
 }
+
+export interface SanityVideo {
+  _key: string;
+  _type: 'videoItem';
+  asset: {
+    _ref: string;
+    _type: 'reference';
+  };
+  videoUrl?: string;
+}
+
+export type CustomerGalleryItem = SanityImage | SanityVideo;
