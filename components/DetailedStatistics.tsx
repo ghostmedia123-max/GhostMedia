@@ -71,6 +71,11 @@ function AnimatedNumber({to, suffix = ''}: {to: string; suffix?: string}) {
   )
 }
 
+const ringContentVariants: Variants = {
+  initial: {opacity: 0},
+  hover: {opacity: 1, transition: {delay: 0.1}},
+}
+
 function ProgressRing({primary, secondary}: {primary: number; secondary: number}) {
   const ref = useRef(null)
   const isInView = useInView(ref, {amount: 0.5})
@@ -100,9 +105,19 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
     <motion.div
       ref={ref}
       className="relative h-20 w-20"
+      initial="initial"
       whileHover={{scale: 1.1}}
+      animate={isInView ? 'hover' : 'initial'}
       transition={{type: 'spring', stiffness: 300}}
     >
+      <motion.div
+        className="absolute inset-0 flex flex-col items-center justify-center"
+        variants={ringContentVariants}
+        initial="initial"
+        animate={isInView ? 'initial' : 'hover'} // Start hidden
+      >
+        <span className="text-xl font-bold text-white">{primary}%</span>
+      </motion.div>
       <svg className="h-full w-full" viewBox="0 0 80 80">
         <circle cx="40" cy="40" r={radius} fill="transparent" stroke="#1f2937" strokeWidth="8" />
         <motion.circle
