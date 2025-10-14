@@ -4,7 +4,6 @@ import {
   getAboutHeroData,
   getServicesSectionData,
   getServicesData,
-  getDetailedStatistics,
 } from '@/lib/data';
 import { Metadata } from 'next';
 import { HeroData, SanitySeo, AboutPageData, AboutSection as AboutSectionType, Service, ServicesSectionData, DetailedStat } from '@/lib/types';
@@ -33,12 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [aboutData, aboutHeroData, servicesSectionData, servicesData, detailedStatsData] = await Promise.all([
+  const [aboutData, aboutHeroData, servicesSectionData, servicesData] = await Promise.all([
     getAboutPage(),
     getAboutHeroData(),
     getServicesSectionData(),
     getServicesData(),
-    getDetailedStatistics(),
   ]);
 
   // Define the color palette to cycle through for the sections
@@ -62,7 +60,7 @@ export default async function AboutPage() {
       <DetailedServicesGrid sectionData={servicesSectionData} services={servicesData || []} />
 
       {/* 4. Detailed Statistics Dashboard */}
-      <DetailedStatistics data={detailedStatsData} />
+      <DetailedStatistics data={aboutData?.detailedStatistics} />
     </div>
   );
 }
