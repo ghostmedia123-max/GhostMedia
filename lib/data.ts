@@ -53,7 +53,18 @@ export async function getAboutPage() {
       headline,
       sections,
       seo,
-      detailedStatistics->
+      detailedStatistics->{
+        title,
+        stats[]{
+          _key,
+          label,
+          mainValue,
+          percentageGrowth,
+          previousValue,
+          progressRing,
+          subStats
+        }
+      }
     }`;
     const data = await client.fetch(query);
     return data;
