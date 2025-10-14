@@ -185,11 +185,15 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                 </div>
                 {stat.descriptionBoxes && stat.descriptionBoxes.length > 0 && (
                   <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
-                    {stat.descriptionBoxes.map((box) => (
-                      <div key={box._key} className="rounded-lg bg-white/5 p-4">
+                    {stat.descriptionBoxes.map(box => (
+                      <motion.div
+                        key={box._key}
+                        whileHover={{y: -4, backgroundColor: 'rgba(255, 255, 255, 0.1)'}}
+                        className="rounded-lg bg-white/5 p-4"
+                      >
                         <p className="font-semibold text-white">{box.title}</p>
                         <p className="mt-1 text-sm text-gray-300">{box.text}</p>
-                      </div>
+                      </motion.div>
                     ))}
                     </div>
                 )}
@@ -198,10 +202,14 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                 <div className="mt-6 rounded-lg bg-white/5 p-4 ring-1 ring-inset ring-white/10">
                   <div className="flex flex-wrap items-center justify-around gap-4">
                     {stat.subStats.map(sub => (
-                      <div key={sub._key} className="flex flex-col items-center text-center">
+                      <motion.div
+                        key={sub._key}
+                        whileHover={{scale: 1.1, color: '#60a5fa'}}
+                        className="flex flex-col items-center text-center"
+                      >
                         <p className="text-sm text-gray-400">{sub.label}</p>
-                        <p className="mt-1 text-xl font-semibold text-white">{sub.value}</p>
-                      </div>
+                        <p className="mt-1 text-xl font-semibold">{sub.value}</p>
+                      </motion.div>
                     ))}
                   </div>
                 </div>
