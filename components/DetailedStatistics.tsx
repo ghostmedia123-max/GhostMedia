@@ -37,7 +37,7 @@ const itemVariants: Variants = {
 
 function AnimatedNumber({to, suffix = ''}: {to: string; suffix?: string}) {
   const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, {once: true, amount: 0.5})
+  const isInView = useInView(ref, {amount: 0.5})
 
   useEffect(() => {
     if (isInView && ref.current) {
@@ -73,7 +73,7 @@ function AnimatedNumber({to, suffix = ''}: {to: string; suffix?: string}) {
 
 function ProgressRing({primary, secondary}: {primary: number; secondary: number}) {
   const ref = useRef(null)
-  const isInView = useInView(ref, {once: true, amount: 0.5})
+  const isInView = useInView(ref, {amount: 0.5})
   const primaryControls = useAnimationControls()
   const secondaryControls = useAnimationControls()
   const radius = 36
@@ -89,6 +89,10 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
         strokeDashoffset: circumference * (1 - (primary + secondary) / 100),
         transition: {duration: 1, ease: 'easeOut'},
       })
+    } else {
+      // Reset animations when out of view
+      primaryControls.start({strokeDashoffset: circumference, transition: {duration: 0}})
+      secondaryControls.start({strokeDashoffset: circumference, transition: {duration: 0}})
     }
   }, [isInView, primary, secondary, circumference, primaryControls, secondaryControls])
 
@@ -129,7 +133,7 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
 
 export default function DetailedStatistics({data}: DetailedStatisticsProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, {once: true, amount: 0.1})
+  const isInView = useInView(ref, {amount: 0.1})
 
   return (
     <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
@@ -150,7 +154,12 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
             </motion.div>
           ) : (
             data.stats.map(stat => (
-            <motion.div key={stat._key} variants={itemVariants} className="rounded-xl bg-[#000c49]/50 p-6 ring-1 ring-white/10">
+            <motion.div
+              key={stat._key}
+              variants={itemVariants}
+              whileHover={{scale: 1.03, transition: {type: 'spring', stiffness: 300}}}
+              className="rounded-xl bg-[#000c49]/50 p-6 ring-1 ring-white/10"
+            >
               <div className="flex flex-col gap-y-6 sm:flex-row sm:items-start sm:justify-between sm:gap-x-8">
                 <div className="flex flex-1 items-start gap-x-6">
                   {stat.progressRing && (
