@@ -170,4 +170,11 @@ export interface DetailedStat {
     secondaryLabel: string;
   };
   subStats?: SubStat[];
+  descriptionBoxes?: DescriptionBox[];
+}
+
+export interface DescriptionBox {
+  _key: string;
+  title: string;
+  text: string;
 }

@@ -9,12 +9,107 @@ export default defineType({
       name: 'title',
       title: 'Section Title',
       type: 'string',
+      description: 'The main title for the detailed statistics section (e.g., "Our Impact").',
     }),
     defineField({
       name: 'stats',
       title: 'Statistics',
       type: 'array',
-      of: [{type: 'detailedStat'}],
+      description: 'The list of detailed statistics to display.',
+      of: [
+        {
+          name: 'detailedStat',
+          title: 'Detailed Statistic',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+              description: 'The main label for this statistic (e.g., "Client Retention").',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'mainValue',
+              title: 'Main Value',
+              type: 'string',
+              description: 'The primary value to display (e.g., "98.6%").',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'percentageGrowth',
+              title: 'Percentage Growth',
+              type: 'number',
+              description: 'The growth percentage to show next to the trending icon.',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'previousValue',
+              title: 'Previous Value Text',
+              type: 'string',
+              description: 'Text describing the previous period (e.g., "from 97.2% last month").',
+            }),
+            defineField({
+              name: 'progressRing',
+              title: 'Progress Ring',
+              type: 'object',
+              description: '(Optional) Add a progress ring visualization.',
+              fields: [
+                defineField({
+                  name: 'primaryValue',
+                  title: 'Primary Value (%)',
+                  type: 'number',
+                  validation: (Rule) => Rule.min(0).max(100),
+                }),
+                defineField({
+                  name: 'primaryLabel',
+                  title: 'Primary Label',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'secondaryValue',
+                  title: 'Secondary Value (%)',
+                  type: 'number',
+                  validation: (Rule) => Rule.min(0).max(100),
+                }),
+                defineField({
+                  name: 'secondaryLabel',
+                  title: 'Secondary Label',
+                  type: 'string',
+                }),
+              ],
+            }),
+            defineField({
+              name: 'subStats',
+              title: 'Sub-Statistics',
+              type: 'array',
+              description: '(Optional) Add up to three smaller sub-stats.',
+              of: [{type: 'detailedStat'}],
+            }),
+            defineField({
+              name: 'descriptionBoxes',
+              title: 'Description Boxes',
+              type: 'array',
+              description: '(Optional) Add text boxes to the right side of the statistic.',
+              of: [
+                {
+                  type: 'object',
+                  name: 'descriptionBox',
+                  title: 'Description Box',
+                  fields: [
+                    defineField({
+                      name: 'title',
+                      title: 'Title',
+                      type: 'string',
+                    }),
+                    defineField({name: 'text', title: 'Text', type: 'text'}),
+                  ],
+                },
+              ],
+            }),
+          ],
+        },
+      ],
     }),
   ],
 })

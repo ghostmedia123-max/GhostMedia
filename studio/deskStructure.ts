@@ -73,6 +73,7 @@ export const deskStructure = (S: StructureBuilder) =>
             'about',
             'contactInfo',
             'statistics',
+            'detailedStatistics',
             'introduction',
             'toolsSection',
             'strategySection',

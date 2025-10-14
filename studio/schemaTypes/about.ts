@@ -40,7 +40,7 @@ export default defineType({
     defineField({
       name: 'detailedStatistics',
       title: 'Detailed Statistics',
-      type: 'detailedStatistics',
+      type: 'detailedStatistics', // This is now correct as it refers to the object schema
     }),
   ],
 })

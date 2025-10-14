@@ -1,6 +1,6 @@
 'use client'
 
-import {DetailedStat, SubStat} from '@/lib/types'
+import {DetailedStat, SubStat, DescriptionBox} from '@/lib/types'
 import {motion, useInView, useAnimationControls, Variants, animate} from 'framer-motion'
 import React, {useEffect, useRef} from 'react'
 import {ArrowTrendingUpIcon} from '@heroicons/react/24/solid'
@@ -9,6 +9,7 @@ interface DetailedStatisticsProps {
   data: {
     title?: string
     stats?: DetailedStat[]
+    descriptionBoxes?: DescriptionBox[]
   }
 }
 
@@ -150,26 +151,38 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
           ) : (
             data.stats.map(stat => (
             <motion.div key={stat._key} variants={itemVariants} className="rounded-xl bg-[#000c49]/50 p-6 ring-1 ring-white/10">
-              <div className="flex flex-col gap-y-6 sm:flex-row sm:items-center sm:justify-between sm:gap-x-8">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-gray-400">{stat.label}</p>
-                  <p className="mt-2 text-4xl font-bold tracking-tight text-white">
-                    <AnimatedNumber to={stat.mainValue} />
-                  </p>
-                  <div className="mt-2 flex items-center gap-x-2">
-                    <ArrowTrendingUpIcon className="h-5 w-5 text-green-400" />
-                    <span className="text-sm font-medium text-green-400">+{stat.percentageGrowth.toLocaleString()}%</span>
-                    <span className="text-sm text-gray-500">{stat.previousValue}</span>
-                  </div>
-                </div>
-                {stat.progressRing && (
-                  <div className="flex flex-shrink-0 items-center gap-x-4">
-                    <ProgressRing primary={stat.progressRing.primaryValue} secondary={stat.progressRing.secondaryValue} />
-                    <div className="text-sm">
-                      <p className="flex items-center gap-x-2 text-white"><span className="h-2 w-2 rounded-full bg-white"></span>{stat.progressRing.primaryLabel}</p>
-                      <p className="flex items-center gap-x-2 text-gray-400"><span className="h-2 w-2 rounded-full bg-blue-500"></span>{stat.progressRing.secondaryLabel}</p>
+              <div className="flex flex-col gap-y-6 sm:flex-row sm:items-start sm:justify-between sm:gap-x-8">
+                <div className="flex flex-1 items-start gap-x-6">
+                  {stat.progressRing && (
+                    <div className="flex flex-shrink-0 items-center gap-x-4">
+                      <ProgressRing primary={stat.progressRing.primaryValue} secondary={stat.progressRing.secondaryValue} />
+                      <div className="text-sm sm:hidden">
+                        <p className="flex items-center gap-x-2 text-white"><span className="h-2 w-2 rounded-full bg-white"></span>{stat.progressRing.primaryLabel}</p>
+                        <p className="flex items-center gap-x-2 text-gray-400"><span className="h-2 w-2 rounded-full bg-blue-500"></span>{stat.progressRing.secondaryLabel}</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-400">{stat.label}</p>
+                    <p className="mt-2 text-4xl font-bold tracking-tight text-white">
+                      <AnimatedNumber to={stat.mainValue} />
+                    </p>
+                    <div className="mt-2 flex items-center gap-x-2">
+                      <ArrowTrendingUpIcon className="h-5 w-5 text-green-400" />
+                      <span className="text-sm font-medium text-green-400">+{stat.percentageGrowth.toLocaleString()}%</span>
+                      <span className="text-sm text-gray-500">{stat.previousValue}</span>
                     </div>
                   </div>
+                </div>
+                {stat.descriptionBoxes && stat.descriptionBoxes.length > 0 && (
+                  <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
+                    {stat.descriptionBoxes.map((box) => (
+                      <div key={box._key} className="rounded-lg bg-white/5 p-4">
+                        <p className="font-semibold text-white">{box.title}</p>
+                        <p className="mt-1 text-sm text-gray-300">{box.text}</p>
+                      </div>
+                    ))}
+                    </div>
                 )}
               </div>
               {stat.subStats && stat.subStats.length > 0 && (

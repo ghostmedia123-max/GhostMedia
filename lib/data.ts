@@ -53,7 +53,7 @@ export async function getAboutPage() {
       headline,
       sections,
       seo,
-      detailedStatistics {
+      detailedStatistics{
         title,
         stats[]{
           _key,
@@ -62,7 +62,8 @@ export async function getAboutPage() {
           percentageGrowth,
           previousValue,
           progressRing,
-          subStats
+          subStats,
+          descriptionBoxes
         }
       }
     }`;
