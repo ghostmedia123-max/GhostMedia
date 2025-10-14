@@ -22,10 +22,6 @@ export const deskStructure = (S: StructureBuilder) =>
         .id('statistics')
         .child(S.document().schemaType('statistics').documentId('statistics')),
       S.listItem()
-        .title('Detailed Statistics')
-        .id('detailedStatistics')
-        .child(S.document().schemaType('detailedStatistics').documentId('detailedStatistics')),
-      S.listItem()
         .title('Introduction Section')
         .id('introduction')
         .child(S.document().schemaType('introduction').documentId('introduction')),
@@ -77,7 +73,6 @@ export const deskStructure = (S: StructureBuilder) =>
             'about',
             'contactInfo',
             'statistics',
-            'detailedStatistics',
             'introduction',
             'toolsSection',
             'strategySection',

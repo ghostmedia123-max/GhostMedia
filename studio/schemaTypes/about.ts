@@ -39,10 +39,8 @@ export default defineType({
     }),
     defineField({
       name: 'detailedStatistics',
-      title: 'Detailed Statistics Section',
-      type: 'reference',
-      to: [{type: 'detailedStatistics'}],
-      description: 'Link to the detailed statistics section to display on this page.',
+      title: 'Detailed Statistics',
+      type: 'detailedStatisticsObject',
     }),
   ],
 })
