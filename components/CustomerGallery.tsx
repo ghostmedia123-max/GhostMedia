@@ -34,24 +34,27 @@ const itemVariants = {
   visible: {opacity: 1, scale: 1},
 }
 
-function GalleryVideo({src}: {src?: string}) {
+function GalleryVideo({src, onClick}: {src?: string; onClick: () => void}) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const isInView = useInView(videoRef, {margin: '0px 0px -50px 0px'})
 
   useEffect(() => {
     if (videoRef.current) {
       if (isInView) {
-        videoRef.current.play()
+        // The play() method returns a promise. It's a good practice to handle it.
+        videoRef.current.play().catch(error => {
+          console.error('Video autoplay was prevented:', error)
+        })
       } else {
         videoRef.current.pause()
       }
     }
   }, [isInView])
 
-  if (!src) return null
-
-  return (
-    <video ref={videoRef} src={src} className="h-full w-full object-cover" autoPlay loop muted playsInline />
+  return !src ? null : (
+    <div onClick={onClick} className="h-full w-full">
+      <video ref={videoRef} src={src} className="h-full w-full object-cover" loop muted playsInline />
+    </div>
   )
 }
 
@@ -84,16 +87,17 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
                     key={item.asset._ref + index}
                     variants={itemVariants}
                     layoutId={item._key}
-                    onClick={() => {
-                      const url = item._type === 'videoItem' ? item.videoUrl : urlFor(item as unknown as SanityImage).url()
-                      if (url) setSelectedImg(url)
-                    }}
-                    className="mb-2 break-inside-avoid cursor-pointer overflow-hidden rounded-lg"
+                    className="mb-2 break-inside-avoid cursor-pointer overflow-hidden"
                     whileHover={{scale: 1.05, zIndex: 10}}
                     transition={{type: 'spring', stiffness: 300}}
                   >
                     {item._type === 'videoItem' ? (
-                      <GalleryVideo src={item.videoUrl} />
+                      <GalleryVideo
+                        src={item.videoUrl}
+                        onClick={() => {
+                          if (item.videoUrl) setSelectedImg(item.videoUrl)
+                        }}
+                      />
                     ) : (
                       <NextImage
                         src={urlFor(item as unknown as SanityImage).width(500).url()}
@@ -103,6 +107,10 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                         className="h-auto w-full object-cover transition-transform duration-300 group-hover:scale-110"
                         style={{height: 'auto'}}
+                        onClick={() => {
+                          const url = urlFor(item as unknown as SanityImage).url()
+                          if (url) setSelectedImg(url)
+                        }}
                       />
                     )}
                   </motion.div>
