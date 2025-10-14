@@ -40,7 +40,7 @@ export default defineType({
     defineField({
       name: 'detailedStatistics',
       title: 'Detailed Statistics',
-      type: 'detailedStatisticsObject',
+      type: 'detailedStatistics',
     }),
   ],
 })
