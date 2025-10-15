@@ -70,7 +70,7 @@ function GalleryVideo({src, onClick}: {src?: string; onClick: () => void}) {
 
 export default function CustomerGallery({galleries}: CustomerGalleryProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, {once: true, amount: 0.1})
+  const isInView = useInView(ref, {once: false, amount: 0.1})
   const [selectedImg, setSelectedImg] = useState<string | null>(null)
 
   if (!galleries || galleries.length === 0) {
@@ -78,28 +78,33 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
   }
 
   return (
-    <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Client Navigation */}
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Client Work</h2>
-          <div className="relative mt-8">
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000729] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000729] to-transparent" />
-            <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              {galleries.map(gallery => (
-                <a
-                  key={gallery._id}
-                  href={`#${slugify(gallery.customerName)}`}
-                  className="flex-shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
-                >
-                  {gallery.customerName}
-                </a>
-              ))}
+    <div ref={ref}>
+      {/* Client Navigation */}
+      <div className="bg-black py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Client Work</h2>
+            <div className="relative mt-8">
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-black to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-black to-transparent" />
+              <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {galleries.map(gallery => (
+                  <a
+                    key={gallery._id}
+                    href={`#${slugify(gallery.customerName)}`}
+                    className="flex-shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-white/20 hover:scale-105"
+                  >
+                    {gallery.customerName}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
+      {/* Gallery Sections */}
+      <div className="bg-[#000729]">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -107,7 +112,12 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
           className="space-y-16"
         >
           {galleries.map(gallery => (
-            <motion.div key={gallery._id} id={slugify(gallery.customerName)} variants={groupVariants} className="scroll-mt-24">
+            <motion.div
+              key={gallery._id}
+              id={slugify(gallery.customerName)}
+              variants={groupVariants}
+              className="flex min-h-screen flex-col justify-center scroll-mt-24 py-16 sm:py-24 px-6 lg:px-8"
+            >
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-8">
                 {gallery.customerName}
               </h2>
