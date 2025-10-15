@@ -34,6 +34,16 @@ const itemVariants = {
   visible: {opacity: 1, scale: 1},
 }
 
+const slugify = (text: string) =>
+  text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+    .replace(/--+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
+
 function GalleryVideo({src, onClick}: {src?: string; onClick: () => void}) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const isInView = useInView(videoRef, {margin: '0px 0px -50px 0px'})
@@ -70,6 +80,24 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
   return (
     <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Client Navigation */}
+        <div className="mb-16 text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Client Work
+          </h2>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            {galleries.map(gallery => (
+              <a
+                key={gallery._id}
+                href={`#${slugify(gallery.customerName)}`}
+                className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+              >
+                {gallery.customerName}
+              </a>
+            ))}
+          </div>
+        </div>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -77,7 +105,7 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
           className="space-y-16"
         >
           {galleries.map(gallery => (
-            <motion.div key={gallery._id} variants={groupVariants}>
+            <motion.div key={gallery._id} id={slugify(gallery.customerName)} variants={groupVariants} className="scroll-mt-24">
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-8">
                 {gallery.customerName}
               </h2>
