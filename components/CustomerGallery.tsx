@@ -82,19 +82,21 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Client Navigation */}
         <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Client Work
-          </h2>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            {galleries.map(gallery => (
-              <a
-                key={gallery._id}
-                href={`#${slugify(gallery.customerName)}`}
-                className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
-              >
-                {gallery.customerName}
-              </a>
-            ))}
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Client Work</h2>
+          <div className="relative mt-8">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000729] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000729] to-transparent" />
+            <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {galleries.map(gallery => (
+                <a
+                  key={gallery._id}
+                  href={`#${slugify(gallery.customerName)}`}
+                  className="flex-shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+                >
+                  {gallery.customerName}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
