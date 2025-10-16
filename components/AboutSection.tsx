@@ -95,8 +95,11 @@ export default function AboutSection({ section, index, color }: AboutSectionProp
           src={urlFor(section.backgroundImage).url()}
           alt={section.backgroundImage.alt || 'Section background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover"
         />
+      )}
+      {section.backgroundImage?.asset && (
+        <div className="absolute inset-0 bg-black opacity-50"></div>
       )}
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">{getLayout()}</div>
     </motion.div>
