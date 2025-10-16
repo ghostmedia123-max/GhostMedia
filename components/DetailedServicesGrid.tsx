@@ -80,7 +80,7 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   return (
     <motion.div
       ref={ref}
-      className="relative bg-[#000c49] py-24 sm:py-32" // The ref is on the outermost div
+      className="relative bg-[#000729] py-24 sm:py-32" // The ref is on the outermost div
       initial="hidden"
       animate={controls} // Controlled by useEffect
     >
