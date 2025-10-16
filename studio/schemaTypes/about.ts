@@ -33,6 +33,14 @@ export default defineType({
               title: 'Text',
               type: 'text',
             }),
+            defineField({
+              name: 'backgroundImage',
+              title: 'Background Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            }),
           ],
         },
       ],

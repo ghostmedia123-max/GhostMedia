@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Service } from '@/lib/types';
+import { Service, ServicesSectionData } from '@/lib/types';
 import React, { useRef, useEffect, useState } from 'react';
 import {
   Cog6ToothIcon,
@@ -13,12 +13,11 @@ import {
   CodeBracketIcon,
 } from '@heroicons/react/24/outline';
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
+import Image from 'next/image';
+import { urlFor } from '@/lib/client';
 
 interface DetailedServicesGridProps {
-  sectionData: {
-    title?: string;
-    description?: string;
-  } | null;
+  sectionData: ServicesSectionData | null;
   services: Service[];
 }
 
@@ -81,10 +80,18 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   return (
     <motion.div
       ref={ref}
-      className="bg-black py-24 sm:py-32" // The ref is on the outermost div
+      className="relative bg-[#000c49] py-24 sm:py-32" // The ref is on the outermost div
       initial="hidden"
       animate={controls} // Controlled by useEffect
     >
+      {sectionData?.backgroundImage && (
+        <Image
+          src={urlFor(sectionData.backgroundImage).url()}
+          alt={sectionData.backgroundImage.alt || 'Services section background'}
+          layout="fill"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
+      )}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* The header animates as a single item */}
         <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">

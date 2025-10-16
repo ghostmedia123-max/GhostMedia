@@ -51,7 +51,7 @@ export async function getAboutPage() {
     // Fetches the headline and rich text body for the About page.
     const query = groq`*[_type == "about"][0] {
       headline,
-      sections,
+      sections[]{..., backgroundImage},
       seo,
       detailedStatistics{
         title,
@@ -317,7 +317,9 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
 
 export async function getGallerySectionData(): Promise<GallerySectionData | null> {
   try {
-    const query = groq`*[_type == "gallerySection"][0]`;
+    const query = groq`*[_type == "servicesSection"][0]{
+      ..., backgroundImage
+    }`;
     const data = await client.fetch(query);
     return data;
   } catch (error) {

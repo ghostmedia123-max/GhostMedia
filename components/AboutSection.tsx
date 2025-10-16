@@ -2,12 +2,16 @@
 
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { urlFor } from '@/lib/client';
+import { SanityImage } from '@/lib/types';
 
 interface AboutSectionProps {
   section: {
     _key: string;
     title: string;
     text: string;
+    backgroundImage?: SanityImage;
   };
   index: number;
   color: string;
@@ -79,7 +83,21 @@ export default function AboutSection({ section, index, color }: AboutSectionProp
   };
 
   return (
-    <motion.div ref={ref} style={{ backgroundColor: color, overflow: 'hidden' }} className="py-24 sm:py-32" initial="hidden" animate={controls}>
+    <motion.div
+      ref={ref}
+      style={{ backgroundColor: color }}
+      className="relative overflow-hidden py-24 sm:py-32"
+      initial="hidden"
+      animate={controls}
+    >
+      {section.backgroundImage?.asset && (
+        <Image
+          src={urlFor(section.backgroundImage).url()}
+          alt={section.backgroundImage.alt || 'Section background'}
+          layout="fill"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
+      )}
       <div className="mx-auto max-w-7xl px-6 lg:px-8">{getLayout()}</div>
     </motion.div>
   );
