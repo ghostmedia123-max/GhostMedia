@@ -69,6 +69,7 @@ export const deskStructure = (S: StructureBuilder) =>
       S.documentTypeListItem('service').title('Services'),
       S.documentTypeListItem('portfolioItem').title('Portfolio Items'),
       S.documentTypeListItem('customerGallery').title('Customer Galleries'),
+      S.documentTypeListItem('page').title('Pages'),
 
       // The rest of the document types, filtered to exclude the singletons
       ...S.documentTypeListItems().filter(
@@ -91,6 +92,7 @@ export const deskStructure = (S: StructureBuilder) =>
             'service',
             'portfolioItem',
             'customerGallery',
+            'page',
             'customerGallerySection',
           ].includes(listItem.getId() || ''),
       ),

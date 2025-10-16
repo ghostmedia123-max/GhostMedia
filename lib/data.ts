@@ -37,7 +37,11 @@ export async function getContactInfo() {
 
 export async function getFooterData() {
   try {
-    const query = groq`*[_type == "footer"][0]`;
+    const query = groq`*[_type == "footer"][0]{
+      ...,
+      "privacyPolicySlug": privacyPolicyPage->slug.current,
+      "termsOfServiceSlug": termsOfServicePage->slug.current
+    }`;
     const data = await client.fetch<FooterData>(query);
     return data || {};
   } catch (error) {
@@ -116,6 +120,20 @@ export async function getServicesSectionData() {
     return data;
   } catch (error) {
     console.error('Failed to fetch services section data:', error);
+    return null;
+  }
+}
+
+export async function getPageBySlug(slug: string) {
+  try {
+    const query = groq`*[_type == "page" && slug.current == $slug][0]{
+      title,
+      body
+    }`;
+    const data = await client.fetch(query, {slug});
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch page data:', error);
     return null;
   }
 }

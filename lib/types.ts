@@ -138,6 +138,8 @@ export interface FooterData {
   siteIcon?: SanityImage;
   description?: string;
   socialLinks?: { network: string; url: string }[];
+  privacyPolicySlug?: string;
+  termsOfServiceSlug?: string;
 }
 
 export interface CarouselSlide {

@@ -19,6 +19,7 @@ import toolsSection from './schemaTypes/toolsSection'
 import detailedStatistics from './schemaTypes/detailedStatistics'
 import customerGallery from './schemaTypes/customerGallery'
 import customerGallerySection from './schemaTypes/customerGallerySection'
+import page from './schemaTypes/page'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
@@ -42,5 +43,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     detailedStatistics,
     customerGallery,
     customerGallerySection,
+    page,
   ],
 }
