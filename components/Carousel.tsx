@@ -102,7 +102,7 @@ export default function Carousel({ data, duration = 60 }: CarouselProps) {
     >
       {data.title && (
         <motion.div variants={entranceItemVariants} className="relative z-10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 mb-12 mx-auto">
             <div className="mx-auto max-w-2xl lg:text-center">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{data.title}</h2>
               {data.description && <p className="mt-6 text-lg leading-8 text-gray-400">{data.description}</p>}

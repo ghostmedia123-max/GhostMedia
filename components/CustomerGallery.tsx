@@ -80,7 +80,7 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
   return (
     <div ref={ref} className="bg-[#000729]">
       {/* Client Navigation */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 sm:pt-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 sm:pt-24 mx-auto">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Client Work</h2>
           <div className="relative mt-8">

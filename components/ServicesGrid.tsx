@@ -1,14 +1,19 @@
 'use client';
 
-import { Service } from '@/lib/types';
+import { Service, ServicesSectionData } from '@/lib/types';
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { urlFor } from '@/lib/client';
 
 interface ServicesGridProps {
-  data: Service[];
+  services: Service[];
+  sectionData: ServicesSectionData | null;
 }
 
-export default function ServicesGrid({ data }: ServicesGridProps) {
+export default function ServicesGrid({ services, sectionData }: ServicesGridProps) {
+  if (!services || services.length === 0) return null;
+
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.2 });
   const controls = useAnimationControls();
@@ -55,7 +60,15 @@ export default function ServicesGrid({ data }: ServicesGridProps) {
   };
 
   return (
-    <section ref={ref} className="bg-[#000c49] py-12 sm:py-16 overflow-hidden">
+    <section ref={ref} className="relative bg-[#000729] py-12 sm:py-16 overflow-hidden">
+      {sectionData?.backgroundImage && (
+        <Image
+          src={urlFor(sectionData.backgroundImage).url()}
+          alt={sectionData.backgroundImage.alt || 'Services section background'}
+          layout="fill"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
+      )}
       <motion.div
         className="mx-auto max-w-7xl px-6 lg:px-8"
         variants={containerVariants}
@@ -67,13 +80,13 @@ export default function ServicesGrid({ data }: ServicesGridProps) {
             variants={headlineVariants}
             className="text-4xl font-bold tracking-tight text-white sm:text-5xl"
           >
-            Our Services
+            {sectionData?.title || 'Our Services'}
           </motion.h2>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
-            {data && data.length > 0 ? (
-              data.map((service, index) => ( // Use service.number as key, fallback to index
+            {services && services.length > 0 ? (
+              services.map((service, index) => ( // Use service.number as key, fallback to index
                 <motion.div
                   key={service.number}
                   variants={itemVariants}

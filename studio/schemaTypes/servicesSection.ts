@@ -21,5 +21,14 @@ export default defineType({
       type: 'text',
       description: 'A short description or tagline to display below the title.',
     }),
+    defineField({
+      name: 'backgroundImage',
+      title: 'Background Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Optional background image for the services section.',
+    }),
   ],
 })

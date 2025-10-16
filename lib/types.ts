@@ -61,6 +61,7 @@ export interface Service {
 export interface ServicesSectionData {
   title?: string;
   description?: string;
+  backgroundImage?: SanityImage;
 }
 
 export interface ContactInfoData {

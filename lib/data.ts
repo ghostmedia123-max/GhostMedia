@@ -109,7 +109,9 @@ export async function getServicesData() {
 
 export async function getServicesSectionData() {
   try {
-    const query = groq`*[_type == "servicesSection"][0]`;
+    const query = groq`*[_type == "servicesSection"][0]{
+      ..., backgroundImage
+    }`;
     const data = await client.fetch(query);
     return data;
   } catch (error) {

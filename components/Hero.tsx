@@ -63,7 +63,7 @@ export default function Hero({data}: HeroProps) {
       )}
       <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay for text readability */}
       <motion.div
-        className="relative z-10"
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8"
         variants={containerVariants}
         initial="hidden"
         animate={controls}

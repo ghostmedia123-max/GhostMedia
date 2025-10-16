@@ -11,6 +11,7 @@ import {
   getHeroData,
   getServicesData,
   getIntroductionData,
+  getServicesSectionData,
   getStatisticsData,
   getToolsSectionData,
   getStrategySectionData,
@@ -47,18 +48,20 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   // Fetch the data needed for the components on this page
   // Using Promise.all to fetch data concurrently for better performance
-  const [servicesResult, heroResult, statsResult, introResult, toolsResult, strategyResult] = await Promise.all([
+  const [servicesResult, heroResult, statsResult, introResult, toolsResult, strategyResult, servicesSectionResult] = await Promise.all([
     getServicesData(),
     getHeroData(),
     getStatisticsData(),
     getIntroductionData(),
     getToolsSectionData(),
     getStrategySectionData(),
+    getServicesSectionData(),
   ]);
 
   // Provide individual fallbacks to ensure page renders even if some data is missing
   const servicesData = servicesResult || [];
   const heroData = heroResult || {};
+  const servicesSectionData = servicesSectionResult || null;
   const statsData = statsResult || [];
   const introData = introResult || {};
   const toolsData = toolsResult || null;
@@ -68,7 +71,7 @@ export default async function HomePage() {
       <div className="overflow-hidden">
         <Hero data={heroData} />
         <Introduction data={introData} />
-        <ServicesGrid data={servicesData} />
+        <ServicesGrid sectionData={servicesSectionData} services={servicesData} />
         <StrategySection data={strategyData} />
         <StatsPreview data={statsData} />
         <ToolsSection data={toolsData} />

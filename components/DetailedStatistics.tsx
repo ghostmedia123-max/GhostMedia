@@ -153,7 +153,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
   const isInView = useInView(ref, {amount: 0.1})
 
   return (
-    <div ref={ref} className="bg-[#000729] py-24 sm:py-32">
+    <div ref={ref} className="bg-black py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{data?.title || 'Our Impact'}</h2>
