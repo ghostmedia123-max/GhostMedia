@@ -96,7 +96,7 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
             {sectionData?.title || 'Client Work'}
           </h2>
         </div>
-        <div className="sticky top-0 z-20 mt-8 bg-[#000c49]/80 py-4 backdrop-blur-sm">
+        <div className="sticky top-16 z-20 mt-8 bg-[#000c49]/80 py-4 backdrop-blur-sm">
           <div className="relative mx-auto max-w-7xl">
             <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000c49] to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000c49] to-transparent" />
