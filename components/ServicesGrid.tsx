@@ -60,7 +60,7 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
   };
 
   return (
-    <section ref={ref} className="relative bg-[#000729] py-12 sm:py-16 overflow-hidden">
+    <section ref={ref} className="relative bg-[#000c49] py-12 sm:py-16 overflow-hidden">
       {sectionData?.backgroundImage && (
         <Image
           src={urlFor(sectionData.backgroundImage).url()}
