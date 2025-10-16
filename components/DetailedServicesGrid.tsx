@@ -89,8 +89,12 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
           src={urlFor(sectionData.backgroundImage).url()}
           alt={sectionData.backgroundImage.alt || 'Services section background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover 
-     )}o max-w-2xl lg:text-center">
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {sectionData?.title || 'Our Services'}
           </h2>
