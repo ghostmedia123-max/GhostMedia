@@ -79,17 +79,17 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
   }
 
   return (
-    <div ref={ref} className="relative bg-[#000c49]">
+    <div ref={ref} className="relative bg-[#000c49] isolate">
       {sectionData?.backgroundImage && (
         <NextImage
           src={urlFor(sectionData.backgroundImage).url()}
           alt={sectionData.backgroundImage.alt || 'Gallery background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="fixed inset-0 h-screen w-screen object-cover -z-10"
         />
       )}
-      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
-      <div className="relative z-10">
+      {sectionData?.backgroundImage && <div className="fixed inset-0 bg-black opacity-50 -z-10" />}
+      <div className="relative">
         {/* Client Navigation */}
         <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 sm:pt-24">
           <div className="text-center">
