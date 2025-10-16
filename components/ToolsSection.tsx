@@ -75,14 +75,17 @@ export default function ToolsSection({data}: ToolsSectionProps) {
   const {title, description, tools, backgroundImage} = data
 
   return (
-    <div ref={ref} className="relative bg-[#000729] py-24 sm:py-32 overflow-hidden">
+    <div ref={ref} className="relative bg-[#000c49] py-24 sm:py-32 overflow-hidden">
       {backgroundImage && (
         <Image
           src={urlFor(backgroundImage).url()}
           alt={backgroundImage.alt || 'Tools section background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover opacity-50"
+          className="absolute inset-0 h-full w-full object-cover"
         />
+      )}
+      {backgroundImage && (
+        <div className="absolute inset-0 bg-black opacity-50"></div>
       )}
       <motion.div
         className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8"
