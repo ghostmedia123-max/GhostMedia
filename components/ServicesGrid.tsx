@@ -66,11 +66,14 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
           src={urlFor(sectionData.backgroundImage).url()}
           alt={sectionData.backgroundImage.alt || 'Services section background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       )}
+      {sectionData?.backgroundImage && (
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+      )}
       <motion.div
-        className="mx-auto max-w-7xl px-6 lg:px-8"
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8"
         variants={containerVariants}
         initial="hidden"
         animate={controls}
