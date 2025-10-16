@@ -1,6 +1,6 @@
 'use client'
 
-import {CustomerGalleryItem, SanityImage} from '@/lib/types'
+import {CustomerGalleryItem, SanityImage, CustomerGallerySectionData} from '@/lib/types'
 import {urlFor} from '@/lib/client'
 import NextImage from 'next/image'
 import {motion, useInView} from 'framer-motion';
@@ -14,6 +14,7 @@ interface CustomerGalleryData {
 
 interface CustomerGalleryProps {
   galleries: CustomerGalleryData[]
+  sectionData: CustomerGallerySectionData | null
 }
 
 const containerVariants = {
@@ -68,7 +69,7 @@ function GalleryVideo({src, onClick}: {src?: string; onClick: () => void}) {
   )
 }
 
-export default function CustomerGallery({galleries}: CustomerGalleryProps) {
+export default function CustomerGallery({galleries, sectionData}: CustomerGalleryProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, {once: false, amount: 0.1})
   const [selectedImg, setSelectedImg] = useState<string | null>(null)
@@ -78,14 +79,25 @@ export default function CustomerGallery({galleries}: CustomerGalleryProps) {
   }
 
   return (
-    <div ref={ref} className="bg-[#000729]">
+    <div ref={ref} className="relative bg-[#000c49]">
+      {sectionData?.backgroundImage && (
+        <NextImage
+          src={urlFor(sectionData.backgroundImage).url()}
+          alt={sectionData.backgroundImage.alt || 'Gallery background'}
+          layout="fill"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
       {/* Client Navigation */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16 sm:pt-24 mx-auto">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 pt-16 sm:pt-24">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Client Work</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {sectionData?.title || 'Client Work'}
+          </h2>
           <div className="relative mt-8">
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000729] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000729] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000c49] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000c49] to-transparent" />
             <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {galleries.map(gallery => (
                 <a

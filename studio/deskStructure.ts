@@ -57,6 +57,10 @@ export const deskStructure = (S: StructureBuilder) =>
         .title('Services Section')
         .id('servicesSection')
         .child(S.document().schemaType('servicesSection').documentId('servicesSection')),
+      S.listItem()
+        .title('Customer Gallery Section')
+        .id('customerGallerySection')
+        .child(S.document().schemaType('customerGallerySection').documentId('customerGallerySection')),
 
       // Divider
       S.divider(),
@@ -87,6 +91,7 @@ export const deskStructure = (S: StructureBuilder) =>
             'service',
             'portfolioItem',
             'customerGallery',
+            'customerGallerySection',
           ].includes(listItem.getId() || ''),
       ),
     ])

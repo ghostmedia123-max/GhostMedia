@@ -192,3 +192,8 @@ export interface SanityVideo {
 }
 
 export type CustomerGalleryItem = SanityImage | SanityVideo;
+
+export interface CustomerGallerySectionData {
+  title?: string;
+  backgroundImage?: SanityImage;
+}

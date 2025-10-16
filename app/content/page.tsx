@@ -3,8 +3,9 @@ import {
   getContentHeroData,
   getTopCarouselData,
   getCustomerGalleries,
+  getCustomerGallerySectionData,
 } from '@/lib/data';
-import { HeroData, CarouselData, SanitySeo } from '@/lib/types';
+import { HeroData, CarouselData, SanitySeo, CustomerGallerySectionData } from '@/lib/types';
 import Carousel from '@/components/Carousel';
 import Hero from '@/components/Hero';
 import CustomerGallery from '@/components/CustomerGallery';
@@ -32,10 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContentPage() {
   // Fetch all data concurrently for performance
-  const [contentHeroData, topCarouselData, customerGalleries] = await Promise.all([
+  const [contentHeroData, topCarouselData, customerGalleries, gallerySectionData] = await Promise.all([
     getContentHeroData(),
     getTopCarouselData(),
     getCustomerGalleries(),
+    getCustomerGallerySectionData(),
   ]);
 
   return (
@@ -48,7 +50,7 @@ export default async function ContentPage() {
         <Carousel data={topCarouselData as CarouselData} duration={30} />
 
         {/* New Customer Gallery Section */}
-        <CustomerGallery galleries={customerGalleries} />
+        <CustomerGallery galleries={customerGalleries} sectionData={gallerySectionData} />
       </main>
       </div>
     </div>

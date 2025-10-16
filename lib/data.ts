@@ -383,3 +383,15 @@ export async function getCustomerGalleries() {
     return [];
   }
 }
+
+export async function getCustomerGallerySectionData() {
+  try {
+    const query = groq`*[_type == "customerGallerySection"][0]{
+      title, backgroundImage
+    }`;
+    return await client.fetch(query);
+  } catch (error) {
+    console.error('Failed to fetch customer gallery section data:', error);
+    return null;
+  }
+}
