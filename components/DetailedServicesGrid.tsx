@@ -80,7 +80,7 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   return (
     <motion.div
       ref={ref}
-      className="relative bg-[#000729] py-24 sm:py-32" // The ref is on the outermost div
+      className="relative bg-[#000729] py-24 sm:py-32"
       initial="hidden"
       animate={controls} // Controlled by useEffect
     >
@@ -89,10 +89,11 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
           src={urlFor(sectionData.backgroundImage).url()}
           alt={sectionData.backgroundImage.alt || 'Services section background'}
           layout="fill"
-          className="absolute inset-0 h-full w-full object-cover opacity-20"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       )}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         {/* The header animates as a single item */}
         <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
