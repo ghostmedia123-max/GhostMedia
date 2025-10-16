@@ -89,27 +89,27 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
         />
       )}
       {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col">
         {/* Client Navigation */}
-        <div className="sticky top-0 z-20 bg-[#000c49]/80 backdrop-blur-sm py-8">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              {sectionData?.title || 'Client Work'}
-            </h2>
-            <div className="relative mt-8">
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000c49] to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000c49] to-transparent" />
-              <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {galleries.map(gallery => (
-                  <a
-                    key={gallery._id}
-                    href={`#${slugify(gallery.customerName)}`}
-                    className="flex-shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-white/20 hover:scale-105"
-                  >
-                    {gallery.customerName}
-                  </a>
-                ))}
-              </div>
+        <div className="mx-auto w-full max-w-7xl px-6 pt-16 text-center sm:pt-24 lg:px-8">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            {sectionData?.title || 'Client Work'}
+          </h2>
+        </div>
+        <div className="sticky top-0 z-20 mt-8 bg-[#000c49]/80 py-4 backdrop-blur-sm">
+          <div className="relative mx-auto max-w-7xl">
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000c49] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000c49] to-transparent" />
+            <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {galleries.map(gallery => (
+                <a
+                  key={gallery._id}
+                  href={`#${slugify(gallery.customerName)}`}
+                  className="flex-shrink-0 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-white/20 hover:scale-105"
+                >
+                  {gallery.customerName}
+                </a>
+              ))}
             </div>
           </div>
         </div>
