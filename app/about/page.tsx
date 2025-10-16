@@ -46,7 +46,7 @@ export default async function AboutPage() {
   ]);
 
   // Define the color palette to cycle through for the sections
-  const colors = ['#000000', '#000729', '#000000'];
+  const colors = ['#000000', '#000c49', '#000000'];
 
   return (
     <div className="flex flex-col">
