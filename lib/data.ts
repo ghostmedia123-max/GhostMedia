@@ -42,7 +42,7 @@ export async function getFooterData() {
       "privacyPolicySlug": privacyPolicyPage->slug.current,
       "termsOfServiceSlug": termsOfServicePage->slug.current
     }`;
-    const data = await client.fetch<FooterData>(query);
+    const data = await client.fetch<FooterData>(query, {}, {cache: 'no-store'});
     return data || {};
   } catch (error) {
     console.error('Failed to fetch footer data:', error);
