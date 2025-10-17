@@ -387,7 +387,7 @@ export async function getDetailedStatistics() {
 
 export async function getCustomerGalleries() {
   try {
-    const query = groq`*[_type == "customerGallery"] | order(_createdAt desc) {
+    const query = groq`*[_type == "customerGallery"] | order(order asc, _createdAt desc) {
       _id,
       customerName,
       mediaItems[]{

@@ -131,7 +131,7 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-8">
                 {gallery.customerName}
               </h2>
-              <div className="columns-2 gap-2 sm:columns-3 md:columns-4 lg:columns-5">
+              <div className="columns-2 gap-2 sm:columns-3 md:columns-4 lg:columns-5 xl:columns-4 2xl:columns-5">
                 {gallery.mediaItems?.map((item, index) => (
                   <motion.div
                     key={item.asset._ref + index}

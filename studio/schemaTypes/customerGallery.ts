@@ -14,6 +14,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      description: 'A number to manually sort the galleries. Lower numbers appear first.',
+    }),
+    defineField({
       name: 'mediaItems',
       title: 'Media Items',
       type: 'array',
