@@ -49,6 +49,20 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'privacyPolicyPage',
+      title: 'Privacy Policy Page',
+      type: 'reference',
+      to: [{type: 'page'}],
+      description: 'Select the page for the Privacy Policy.',
+    }),
+    defineField({
+      name: 'termsOfServicePage',
+      title: 'Terms of Service Page',
+      type: 'reference',
+      to: [{type: 'page'}],
+      description: 'Select the page for the Terms of Service.',
+    }),
   ],
   preview: {
     select: {

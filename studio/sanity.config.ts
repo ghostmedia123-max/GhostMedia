@@ -3,9 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schema} from './schema'
 import {deskStructure} from './deskStructure'
-import seo from './schemaTypes/seo' // Corrected path
-import page from './schemaTypes/page' // Corrected path
-import detailedStat from './schemaTypes/detailedStat'
+import seo from './schemaTypes/seo'
 
 export default defineConfig({
   name: 'default',
@@ -19,6 +17,6 @@ export default defineConfig({
   // Add the schema to the config
   schema: {
     // Add the new schemas to the existing types
-    types: [...schema.types, seo, page, detailedStat],
+    types: [...schema.types, seo],
   },
 })

@@ -50,5 +50,10 @@ export default defineType({
       title: 'Detailed Statistics',
       type: 'detailedStatistics', // This is now correct as it refers to the object schema
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seo',
+    }),
   ],
 })

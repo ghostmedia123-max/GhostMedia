@@ -119,14 +119,14 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="space-y-16"
+          className="mx-auto max-w-7xl space-y-12 px-6 lg:px-8"
         >
           {galleries.map(gallery => (
             <motion.div
               key={gallery._id}
               id={slugify(gallery.customerName)}
               variants={groupVariants}
-              className="flex min-h-screen flex-col justify-center scroll-mt-24 py-16 sm:py-24 px-6 lg:px-8"
+              className="scroll-mt-24 py-16 sm:py-24"
             >
               <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl mb-8">
                 {gallery.customerName}

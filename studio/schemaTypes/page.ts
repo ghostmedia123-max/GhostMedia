@@ -29,6 +29,11 @@ export default defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {title: 'title'},

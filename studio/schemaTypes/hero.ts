@@ -49,6 +49,14 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+          description: 'Important for SEO and accessibility.',
+        }),
+      ],
     }),
     defineField({
       name: 'ctaText',
@@ -60,6 +68,11 @@ export default defineType({
       title: 'CTA Button Link',
       type: 'string',
       description: 'The URL the button should link to (e.g., /contact).',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seo',
     }),
   ],
   preview: {

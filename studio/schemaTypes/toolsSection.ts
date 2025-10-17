@@ -28,6 +28,14 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+          description: 'Important for SEO and accessibility.',
+        }),
+      ],
     }),
     defineField({
       name: 'tools',
