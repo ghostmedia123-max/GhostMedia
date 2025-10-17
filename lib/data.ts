@@ -395,7 +395,7 @@ export async function getCustomerGalleries() {
         "videoUrl": asset->url
       }
     }`;
-    return await client.fetch(query);
+    return await client.fetch(query, {}, {cache: 'no-store'});
   } catch (error) {
     console.error('Failed to fetch customer galleries:', error);
     return [];
