@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 
 // SVG Icon components for social media
-const SocialIcons = {
+const SocialIcons: { [key: string]: React.ElementType } = {
   Facebook: (props: any) => (
     <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z" /></svg>
   ),
@@ -119,7 +119,7 @@ export default function Footer({ data }: FooterProps) {
               {(socialLinks || []).map((item) => {
                 // Find the icon key in a case-insensitive way
                 const iconKey = Object.keys(SocialIcons).find(key => key.toLowerCase() === item.network.toLowerCase());
-                const Icon = iconKey ? SocialIcons[iconKey as keyof typeof SocialIcons] : null;
+                const Icon = iconKey ? SocialIcons[iconKey] : null;
 
                 return (
                   <a key={item.network} href={item.url} className="text-gray-500 transition-transform duration-200 hover:scale-110 hover:text-white">
