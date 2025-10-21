@@ -78,22 +78,25 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   }
 
   return (
-    <motion.div
-      ref={ref}
-      className="relative bg-[#000c49] py-24 sm:py-32"
-      initial="hidden"
-      animate={controls} // Controlled by useEffect
-    >
+    <div className="relative bg-[#000c49]">
       {sectionData?.backgroundImage && (
-        <Image
-          src={urlFor(sectionData.backgroundImage).url()}
-          alt={sectionData.backgroundImage.alt || 'Services section background'}
-          layout="fill"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+        <>
+          <Image
+            src={urlFor(sectionData.backgroundImage).url()}
+            alt={sectionData.backgroundImage.alt || 'Services section background'}
+            layout="fill"
+            className="absolute inset-0 h-full w-full object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black opacity-50" />
+        </>
       )}
-      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+      <motion.div
+        ref={ref}
+        className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8"
+        initial="hidden"
+        animate={controls}
+      >
         <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {sectionData?.title || 'Our Services'}
@@ -106,7 +109,6 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
         <motion.div
           className="mt-16 flex flex-wrap justify-center gap-8 sm:mt-20"
           variants={containerVariants}
-          // initial and animate are inherited from the parent `motion.div`
         >
           {services.map((service, index) => (
             <motion.div
@@ -178,7 +180,7 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
             </motion.div>
           ))}
         </motion.div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }

@@ -57,9 +57,9 @@ export default function AboutStatistics({ stats }: AboutStatisticsProps) {
       </>
     );
   }
+  const controls = useAnimationControls();
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.2 });
-  const controls = useAnimationControls();
 
   useEffect(() => {
     if (isInView) {
@@ -70,9 +70,8 @@ export default function AboutStatistics({ stats }: AboutStatisticsProps) {
   }, [isInView, controls]);
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.15,
         delayChildren: 0.2,
@@ -81,22 +80,16 @@ export default function AboutStatistics({ stats }: AboutStatisticsProps) {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.8, ease: 'easeOut' },
     },
   };
 
   return (
-    <div ref={ref} className="bg-black py-24 sm:py-32">
-      <motion.div
-        className="mx-auto max-w-7xl px-6 lg:px-8"
-        variants={containerVariants}
-        initial="hidden"
-        animate={controls}
-      >
+    <div ref={ref} className="bg-black py-24 sm:py-32 overflow-hidden">
+      <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" variants={containerVariants} initial="hidden" animate={controls}>
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <motion.div variants={itemVariants} className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Trusted by creators worldwide</h2>
@@ -106,7 +99,7 @@ export default function AboutStatistics({ stats }: AboutStatisticsProps) {
           </motion.div>
           <div className="mt-16 grid grid-cols-1 gap-8 text-center sm:grid-cols-2 lg:grid-cols-3">
             {stats?.map((stat: Statistic, index: number) => (
-              <motion.div key={stat._key || index} variants={itemVariants} layout>
+              <motion.div key={stat._key || index} variants={itemVariants}>
                 <motion.div
                   className="flex flex-col items-center justify-start p-8 bg-gray-900 rounded-lg shadow-lg h-full"
                   whileHover={{

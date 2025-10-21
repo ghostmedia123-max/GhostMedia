@@ -82,8 +82,8 @@ export default function StatsPreview({ data }: StatsPreviewProps) {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 0 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
   };
 
   return (
@@ -105,8 +105,6 @@ export default function StatsPreview({ data }: StatsPreviewProps) {
               {stats.map((stat: Statistic, index) => ( // Use stat._key if available, otherwise fallback to index
                 <motion.div
                   variants={itemVariants}
-                  initial="hidden"
-                  animate={controls}
                   key={stat.label || index}
                   className="flex flex-col items-center justify-center p-8 bg-gray-900 rounded-lg shadow-lg"
                   whileHover={{

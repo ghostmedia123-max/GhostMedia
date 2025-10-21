@@ -38,7 +38,7 @@ export default function StrategySection({data}: StrategySectionProps) {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { duration: 0.8, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: 'easeOut' },
     },
   };
 
@@ -46,7 +46,7 @@ export default function StrategySection({data}: StrategySectionProps) {
     hidden: { scaleX: 0, originX: 0 },
     visible: {
       scaleX: 1,
-      transition: { duration: 0.6, ease: 'circOut', delay: 0.2 }, // This was duplicated, keeping the more fine-tuned value
+      transition: { duration: 0.5, ease: 'circOut', delay: 0.2 },
     },
   };
 
@@ -56,7 +56,7 @@ export default function StrategySection({data}: StrategySectionProps) {
       opacity: 1,
       rotateX: 0,
       y: 0,
-      transition: { duration: 0.7, ease: 'easeOut' },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
 
@@ -67,7 +67,7 @@ export default function StrategySection({data}: StrategySectionProps) {
   const {title, steps} = data
 
   return (
-    <div ref={ref} className="bg-black min-h-screen flex items-center justify-center overflow-hidden">
+    <div ref={ref} className="bg-black min-h-screen flex items-center justify-center overflow-hidden py-24 sm:py-32">
       <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" initial="hidden" animate={controls}>
         <div className="mx-auto max-w-4xl lg:text-center">
           <motion.h2 variants={headlineVariants} className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
