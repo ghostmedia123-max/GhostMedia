@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { Service, ServicesSectionData } from '@/lib/types';
 import React, { useRef, useEffect, useState } from 'react';
+import Image from 'next/image'; // Import Next.js Image component
+import { urlFor } from '@/lib/client'; // Import urlFor for Sanity image URLs
 import {
   Cog6ToothIcon,
   ChartBarIcon,
@@ -13,11 +15,6 @@ import {
   CodeBracketIcon,
 } from '@heroicons/react/24/outline';
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
-
-interface DetailedServicesGridProps {
-  sectionData: ServicesSectionData | null;
-  services: Service[];
-}
 
 const iconMap: { [key: string]: React.ElementType } = {
   Cog: Cog6ToothIcon,
@@ -35,6 +32,11 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
     </svg>
   );
+}
+
+interface DetailedServicesGridProps {
+  sectionData: ServicesSectionData | null;
+  services: Service[];
 }
 
 export default function DetailedServicesGrid({ sectionData, services }: DetailedServicesGridProps) {
@@ -75,14 +77,26 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   }
 
   return (
-    <div className="bg-[#000c49] py-24 sm:py-32">
+    <div className="relative bg-[#000c49] py-24 sm:py-32"> {/* Outer container with padding, relative */}
       <motion.div
         ref={ref}
-        className="mx-auto max-w-7xl px-6 lg:px-8"
+        className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8" /* Content container, relative z-10, no vertical padding */
         initial="hidden"
         animate={controls}
         variants={containerVariants}
       >
+        {sectionData?.backgroundImage && (
+          <>
+            <Image
+              src={urlFor(sectionData.backgroundImage).url()}
+              alt={sectionData.backgroundImage.alt || 'Services section background'}
+              fill
+              className="absolute inset-0 z-0 h-full w-full object-cover" /* Image fills this outer div */
+              priority
+            />
+            <div className="absolute inset-0 z-0 bg-black opacity-50" /> {/* Overlay fills this outer div */}
+          </>
+        )}
         <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {sectionData?.title || 'Our Services'}
