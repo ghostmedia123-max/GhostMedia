@@ -13,8 +13,6 @@ import {
   CodeBracketIcon,
 } from '@heroicons/react/24/outline';
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
-import Image from 'next/image';
-import { urlFor } from '@/lib/client';
 
 interface DetailedServicesGridProps {
   sectionData: ServicesSectionData | null;
@@ -42,7 +40,7 @@ function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function DetailedServicesGrid({ sectionData, services }: DetailedServicesGridProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.1, once: false }); // `once: false` is key for on/off scroll
+  const isInView = useInView(ref, { amount: 0.1, once: false });
   const controls = useAnimationControls();
 
   const itemVariants: Variants = {
@@ -58,12 +56,11 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   };
 
   const containerVariants: Variants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.2, // Small delay before cards start animating in
+        delayChildren: 0.2,
       },
     },
   };
@@ -78,24 +75,13 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
   }
 
   return (
-    <div className="relative bg-[#000c49]">
-      {sectionData?.backgroundImage && (
-        <>
-          <Image
-            src={urlFor(sectionData.backgroundImage).url()}
-            alt={sectionData.backgroundImage.alt || 'Services section background'}
-            layout="fill"
-            className="absolute inset-0 h-full w-full object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black opacity-50" />
-        </>
-      )}
+    <div className="bg-[#000c49] py-24 sm:py-32">
       <motion.div
         ref={ref}
-        className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8"
+        className="mx-auto max-w-7xl px-6 lg:px-8"
         initial="hidden"
         animate={controls}
+        variants={containerVariants}
       >
         <motion.div variants={itemVariants} className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -105,11 +91,8 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
             <p className="mt-6 text-lg leading-8 text-gray-300">{sectionData.description}</p>
           )}
         </motion.div>
-        {/* This motion.div is the direct parent for the staggered cards */}
-        <motion.div
-          className="mt-16 flex flex-wrap justify-center gap-8 sm:mt-20"
-          variants={containerVariants}
-        >
+        
+        <div className="mt-16 flex flex-wrap justify-center gap-8 sm:mt-20">
           {services.map((service, index) => (
             <motion.div
               layout
@@ -179,7 +162,7 @@ export default function DetailedServicesGrid({ sectionData, services }: Detailed
               )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     </div>
   );

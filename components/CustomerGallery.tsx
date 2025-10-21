@@ -1,9 +1,9 @@
 'use client'
 
 import {CustomerGalleryItem, SanityImage, CustomerGallerySectionData} from '@/lib/types'
-import {urlFor} from '@/lib/client'
-import NextImage from 'next/image'
 import {motion, useInView} from 'framer-motion';
+import Image from 'next/image'
+import {urlFor} from '@/lib/client'
 import {useEffect, useRef, useState} from 'react';
 
 interface CustomerGalleryData {
@@ -79,17 +79,8 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
   }
 
   return (
-    <div ref={ref} className="relative bg-[#000c49]">
-      {sectionData?.backgroundImage && (
-        <NextImage
-          src={urlFor(sectionData.backgroundImage).url()}
-          alt={sectionData.backgroundImage.alt || 'Gallery background'}
-          layout="fill"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-      {sectionData?.backgroundImage && <div className="absolute inset-0 bg-black opacity-50" />}
-      <div className="relative z-10 flex flex-col">
+    <div ref={ref} className="bg-[#000c49]">
+      <div className="flex flex-col">
         {/* Client Navigation */}
         <div className="mx-auto w-full max-w-7xl px-6 pt-16 text-center sm:pt-24 lg:px-8">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -149,7 +140,7 @@ export default function CustomerGallery({galleries, sectionData}: CustomerGaller
                         }}
                       />
                     ) : (
-                      <NextImage
+                      <Image
                         src={urlFor(item as unknown as SanityImage).width(500).url()}
                         alt={item.alt || `Gallery image for ${gallery.customerName}`}
                         width={500}

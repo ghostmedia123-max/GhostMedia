@@ -14,15 +14,6 @@ export default defineType({
       description: 'The main title for the client work section (e.g., "Client Work").',
       initialValue: 'Client Work',
     }),
-    defineField({
-      name: 'backgroundImage',
-      title: 'Background Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      description: 'Optional background image for the entire customer gallery section.',
-    }),
   ],
   preview: {
     prepare() {
