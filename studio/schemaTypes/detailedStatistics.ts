@@ -3,13 +3,14 @@ import {defineField, defineType} from 'sanity'
 export default defineType({
   name: 'detailedStatistics',
   title: 'Detailed Statistics Section',
-  type: 'object',
+  type: 'document',
   fields: [
     defineField({
       name: 'title',
       title: 'Section Title',
       type: 'string',
       description: 'The main title for the detailed statistics section (e.g., "Our Impact").',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'stats',
@@ -90,25 +91,18 @@ export default defineType({
                   title: 'Sub-Statistic',
                   type: 'object',
                   fields: [
-                    defineField({name: 'label', type: 'string'}),
-                    defineField({name: 'value', type: 'string'}),
-                  ],
-                },
-              ],
-            }),
-            defineField({
-              name: 'descriptionBoxes',
-              title: 'Description Boxes',
-              type: 'array',
-              description: '(Optional) Add text boxes to the right side of the statistic.',
-              of: [
-                {
-                  type: 'object',
-                  name: 'descriptionBox',
-                  title: 'Description Box',
-                  fields: [
-                    defineField({name: 'title', title: 'Title', type: 'string'}),
-                    defineField({name: 'text', title: 'Text', type: 'text'}),
+                    defineField({
+                      name: 'label',
+                      title: 'Label',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'value',
+                      title: 'Value',
+                      type: 'string',
+                      validation: (Rule) => Rule.required(),
+                    }),
                   ],
                 },
               ],

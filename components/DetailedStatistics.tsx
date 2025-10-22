@@ -1,16 +1,12 @@
 'use client'
 
-import {DetailedStat, SubStat, DescriptionBox} from '@/lib/types'
+import {DetailedStat, SubStat, DescriptionBox, DetailedStatisticsData} from '../lib/types'
 import {motion, useInView, useAnimationControls, Variants, animate} from 'framer-motion'
 import React, {useEffect, useRef} from 'react'
 import {ArrowTrendingUpIcon} from '@heroicons/react/24/solid'
 
 interface DetailedStatisticsProps {
-  data: {
-    title?: string
-    stats?: DetailedStat[]
-    descriptionBoxes?: DescriptionBox[]
-  }
+  data: DetailedStatisticsData | null | undefined;
 }
 
 const containerVariants: Variants = {

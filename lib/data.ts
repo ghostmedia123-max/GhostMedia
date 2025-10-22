@@ -1,5 +1,6 @@
 import { createClient, groq } from 'next-sanity';
 import { client } from './client';
+import { MoreServicesData } from './types';
 // Default content from local JSON files
 import heroDefaults from '@/defaults/hero-default.json';
 import statsDefaults from '@/defaults/stats-default.json';
@@ -410,6 +411,19 @@ export async function getCustomerGallerySectionData() {
     return await client.fetch(query);
   } catch (error) {
     console.error('Failed to fetch customer gallery section data:', error);
+    return null;
+  }
+}
+
+export async function getMoreServicesData(): Promise<MoreServicesData | null> {
+  try {
+    const query = groq`*[_type == "moreServices"][0]{
+      title,
+      backgroundImage
+    }`;
+    return await client.fetch<MoreServicesData>(query);
+  } catch (error) {
+    console.error('Failed to fetch "More Services" section data:', error);
     return null;
   }
 }

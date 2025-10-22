@@ -1,23 +1,16 @@
-import {
-  getAboutPage,
-  getAboutHeroData,
-  getServicesSectionData,
-  getServicesData,
-} from '@/lib/data';
+import {getAboutPage, getAboutHeroData, getMoreServicesData} from '@/lib/data'
 import { Metadata } from 'next';
 import {
   HeroData,
   SanitySeo,
   AboutPageData,
   AboutSection as AboutSectionType,
-  Service,
-  ServicesSectionData,
 } from '@/lib/types';
 import Hero from '@/components/Hero';
 
 import AboutSection from '@/components/AboutSection';
-import DetailedServicesGrid from '@/components/DetailedServicesGrid';
-import DetailedStatistics from '@/components/DetailedStatistics';
+import DetailedStatistics from '@/components/DetailedStatistics'
+import MoreServices from '@/components/MoreServices'
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -38,12 +31,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [aboutData, aboutHeroData, servicesSectionData, servicesData] = await Promise.all([
+  const [aboutData, aboutHeroData, moreServicesData] = await Promise.all([
     getAboutPage(),
     getAboutHeroData(),
-    getServicesSectionData(),
-    getServicesData(),
-  ]);
+    getMoreServicesData(),
+  ])
 
   // Define the color palette to cycle through for the sections
   const colors = ['#000000', '#000c49', '#000000'];
@@ -62,10 +54,8 @@ export default async function AboutPage() {
         />
       ))}
 
-      {/* 3. Services Grid */}
-      <DetailedServicesGrid sectionData={servicesSectionData} services={servicesData || []} />
+      <MoreServices data={moreServicesData} />
 
-      {/* 4. Detailed Statistics Dashboard */}
       <DetailedStatistics data={aboutData?.detailedStatistics} />
     </div>
   );

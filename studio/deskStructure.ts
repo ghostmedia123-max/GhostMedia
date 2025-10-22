@@ -22,6 +22,10 @@ export const deskStructure = (S: StructureBuilder) =>
         .id('statistics')
         .child(S.document().schemaType('statistics').documentId('statistics')),
       S.listItem()
+        .title('Detailed Statistics')
+        .id('detailedStatistics')
+        .child(S.document().schemaType('detailedStatistics').documentId('detailedStatistics')),
+      S.listItem()
         .title('Introduction Section')
         .id('introduction')
         .child(S.document().schemaType('introduction').documentId('introduction')),
@@ -61,6 +65,10 @@ export const deskStructure = (S: StructureBuilder) =>
         .title('Customer Gallery Section')
         .id('customerGallerySection')
         .child(S.document().schemaType('customerGallerySection').documentId('customerGallerySection')),
+      S.listItem()
+        .title('More Services Section')
+        .id('moreServices')
+        .child(S.document().schemaType('moreServices').documentId('moreServices')),
 
       // Divider
       S.divider(),
@@ -92,6 +100,7 @@ export const deskStructure = (S: StructureBuilder) =>
             'service',
             'portfolioItem',
             'customerGallery',
+            'moreServices',
             'page',
             'customerGallerySection',
           ].includes(listItem.getId() || ''),

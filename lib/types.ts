@@ -199,3 +199,14 @@ export interface CustomerGallerySectionData {
   title?: string;
   backgroundImage?: SanityImage;
 }
+
+export interface MoreServicesData {
+  title?: string;
+  backgroundImage?: SanityImage;
+}
+
+export interface DetailedStatisticsData {
+  title?: string;
+  stats?: DetailedStat[];
+  descriptionBoxes?: DescriptionBox[];
+}
