@@ -1,5 +1,5 @@
 import { getContactInfo, getHeaderHeroData } from '@/lib/data';
-import { ContactInfoData, HeaderHeroData, SanitySeo } from '@/lib/types';
+import { ContactInfoData, HeaderHeroData } from '@/lib/types';
 import { Metadata } from 'next';
 import HeaderHero from '@/components/HeaderHero';
 import ContactClient from '@/components/ContactClient';
