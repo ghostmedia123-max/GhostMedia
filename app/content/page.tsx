@@ -1,13 +1,9 @@
 import { Metadata } from 'next';
-import { getTopCarouselData, getGalleryPageData, getGalleryCustomers } from '@/lib/data';
-import { HeroData, CarouselData, SanitySeo } from '@/lib/types';
+import { getHeaderHeroData, getTopCarouselData, getGalleryPageData, getGalleryCustomers } from '@/lib/data';
+import { HeaderHeroData, CarouselData, SanitySeo } from '@/lib/types';
 import Carousel from '@/components/Carousel';
-// import Hero from '@/components/Hero';
+import HeaderHero from '@/components/HeaderHero';
 import Gallery from '@/components/Gallery';
-
-interface ContentHeroData extends HeroData {
-  seo?: SanitySeo;
-}
 
 // This ensures the page is always dynamically rendered.
 export const dynamic = 'force-dynamic';
@@ -28,17 +24,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContentPage() {
   // Fetch all data concurrently for performance
-  const [topCarouselData, galleryPageData, galleryCustomers] = await Promise.all([
-    // getContentHeroData(),
+  const [headerHeroData, topCarouselData, galleryPageData, galleryCustomers] = await Promise.all([
+    getHeaderHeroData('content'),
     getTopCarouselData(),
     getGalleryPageData(),
     getGalleryCustomers(),
   ]);
+  const heroData = headerHeroData || { _type: 'headerHero' };
 
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      {/* <Hero data={contentHeroData as HeroData} /> */}
+      <HeaderHero data={heroData} />
       <div className="bg-black text-white">
       <main>
         {/* Top Carousel Section */}

@@ -1,12 +1,12 @@
-import {getAboutPage, getMoreServicesData} from '@/lib/data'
+import {getAboutPage, getHeaderHeroData, getMoreServicesData} from '@/lib/data'
 import { Metadata } from 'next';
 import {
-  HeroData,
   SanitySeo,
   AboutPageData,
   AboutSection as AboutSectionType,
+  HeaderHeroData,
 } from '@/lib/types';
-// import Hero from '@/components/Hero';
+import HeaderHero from '@/components/HeaderHero';
 
 import AboutSection from '@/components/AboutSection';
 import DetailedStatistics from '@/components/DetailedStatistics'
@@ -31,18 +31,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [aboutData, moreServicesData] = await Promise.all([
+  const [aboutData, headerHeroData, moreServicesData] = await Promise.all([
     getAboutPage(),
-    // getAboutHeroData(),
+    getHeaderHeroData('about'),
     getMoreServicesData(),
   ])
 
   // Define the color palette to cycle through for the sections
   const colors = ['#000000', '#000c49', '#000000'];
+  const heroData = headerHeroData || { _type: 'headerHero' };
 
   return (
     <div className="flex flex-col">
-      {/* <Hero data={aboutHeroData} /> */}
+      <HeaderHero data={heroData} />
 
       {/* 2. About Body Sections */}
       {aboutData?.sections?.map((section: AboutSectionType, index: number) => (

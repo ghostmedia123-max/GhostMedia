@@ -15,9 +15,13 @@ export interface SanitySeo {
 
 export interface HeaderHeroData {
   _type: 'headerHero';
-  page?: string;
   backgroundImage?: SanityImage;
-  // We will add more fields like headline, subtext, etc. here
+  headline?: string;
+  subtext?: string;
+  tagline?: string;
+  logo?: SanityImage;
+  ctaText?: string;
+  ctaLink?: string;
 }
 
 export interface AboutSection {
