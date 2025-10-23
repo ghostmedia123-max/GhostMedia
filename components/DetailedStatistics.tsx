@@ -190,7 +190,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   </div>
                 </div>
                 {stat.descriptionBoxes && stat.descriptionBoxes.length > 0 && (
-                  <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="grid w-full flex-1 grid-cols-1 gap-4 sm:w-auto sm:grid-cols-2">
                     {stat.descriptionBoxes.map(box => (
                       <motion.div
                         key={box._key}
@@ -206,7 +206,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
               </div>
               {stat.subStats && stat.subStats.length > 0 && (
                 <div className="mt-6 rounded-lg bg-white/5 p-4 ring-1 ring-inset ring-white/10">
-                  <div className="flex flex-wrap items-center justify-around gap-4">
+                  <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
                     {stat.subStats.map(sub => (
                       <motion.div
                         key={sub._key}

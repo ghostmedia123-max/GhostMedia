@@ -87,7 +87,7 @@ const ContactForm = () => {
     <motion.form // This will inherit variants from the parent in page.tsx
       variants={containerVariants}
       onSubmit={handleSubmit}
-      className="space-y-6 w-full max-w-lg mx-auto"
+      className="space-y-6 w-full"
     >
       {/* Honeypot field: visually hidden but accessible to screen readers, but should be empty */}
       <div className="absolute w-0 h-0 overflow-hidden">
