@@ -58,7 +58,7 @@ export async function getAboutPage() {
       headline,
       sections[]{..., backgroundImage},
       seo,
-      detailedStatistics->{
+      detailedStatistics{
         title,
         stats[]{
           _key,

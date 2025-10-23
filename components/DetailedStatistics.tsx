@@ -154,9 +154,9 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {!data || !data.stats || data.stats.length === 0 ? (
+          {!data?.stats || data.stats.length === 0 ? (
             <motion.div variants={itemVariants} className="text-center text-gray-400">
-              <p>Detailed statistics will be displayed here soon.</p>
+              <p>No statistics have been added. Please add statistics in the CMS.</p>
             </motion.div>
           ) : (
             data.stats.map(stat => (
