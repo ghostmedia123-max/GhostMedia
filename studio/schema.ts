@@ -20,9 +20,11 @@ import galleryPage from './schemaTypes/galleryPage'
 import galleryCustomer from './schemaTypes/galleryCustomer'
 import footer from './schemaTypes/footer'
 import page from './schemaTypes/page'
+import headerHero from './schemaTypes/headerhero'
 
-export const schema: {types: SchemaTypeDefinition[]} = {
+export const schema = {
   types: [
+    headerHero,
     about,
     aboutHero,
     contactHero,

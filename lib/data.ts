@@ -55,9 +55,10 @@ export async function getContactInfo() {
 }
 
 export async function getHeaderHeroData(page: string): Promise<HeaderHeroData | null> {
-  const query = groq`*[_type == "headerHero" && page == $page][0]`;
+  const documentId = `headerHero_${page}`;
+  const query = groq`*[_type == "headerHero" && _id == $documentId][0]`;
   try {
-    const data = await client.fetch(query, { page });
+    const data = await client.fetch(query, { documentId });
     return data;
   } catch (error) {
     console.error(`Error fetching header hero data for page "${page}":`, error);

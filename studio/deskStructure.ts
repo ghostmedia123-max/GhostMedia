@@ -6,6 +6,27 @@ export const deskStructure = (S: StructureBuilder) =>
     .items([
       // Singleton documents
       S.listItem()
+        .title('Header Heroes')
+        .id('headerHeroes')
+        .child(
+          S.list()
+            .title('Header Heroes')
+            .items([
+              S.listItem()
+                .title('Home Page Hero')
+                .child(S.document().schemaType('headerHero').documentId('headerHero_home')),
+              S.listItem()
+                .title('About Page Hero')
+                .child(S.document().schemaType('headerHero').documentId('headerHero_about')),
+              S.listItem()
+                .title('Contact Page Hero')
+                .child(S.document().schemaType('headerHero').documentId('headerHero_contact')),
+              S.listItem()
+                .title('Content Page Hero')
+                .child(S.document().schemaType('headerHero').documentId('headerHero_content')),
+            ]),
+        ),
+      S.listItem()
         .title('Hero Section')
         .id('hero')
         .child(S.document().schemaType('hero').documentId('hero')),
@@ -72,6 +93,7 @@ export const deskStructure = (S: StructureBuilder) =>
       ...S.documentTypeListItems().filter(
         (listItem) =>
           ![
+            'headerHero', // This will hide the generic 'Header Hero' type from the main list
             'hero',
             'about',
             'contactInfo',
