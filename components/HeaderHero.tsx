@@ -65,7 +65,7 @@ function HeroContent({ data }: HeaderHeroProps) {
         initial="hidden"
         animate={controls}
       >
-        <div className="flex flex-col items-center text-center md:flex-row md:items-center md:text-left">
+        <div className="flex flex-col items-center justify-center text-center md:flex-row md:items-center md:text-left">
           {data.logo?.asset && (
             <motion.div variants={itemVariants} className="relative mb-6 flex-shrink-0 md:mb-0 md:mr-8">
               <Image
@@ -88,7 +88,7 @@ function HeroContent({ data }: HeaderHeroProps) {
             )}
           </div>
         </div>
-        <div className="absolute bottom-10 left-0 right-0 z-10 text-center">
+        <div className="mt-10 md:absolute md:bottom-10 md:left-0 md:right-0 md:mt-0 z-10 text-center">
           {data.tagline && (
             <motion.p variants={itemVariants} className="mb-8 px-4 text-lg md:text-xl">{data.tagline}</motion.p>
           )}
