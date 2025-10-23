@@ -14,13 +14,13 @@ export default function HeaderHero({data}: HeaderHeroProps) {
       className="relative flex h-screen items-center justify-center bg-[#000c49] text-white overflow-hidden"
     >
       {/* Background Image and Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 h-full w-full">
         {data.backgroundImage?.asset && (
           <Image
             src={urlFor(data.backgroundImage).url()}
             alt={data.backgroundImage.alt || 'Hero background image'}
             fill
-            className="object-cover"
+            className="h-full w-full object-cover"
             priority
           />
         )}
