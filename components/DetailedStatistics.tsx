@@ -179,13 +179,13 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   )}
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-400">{stat.label}</p>
-                    <p className="mt-2 text-4xl font-bold tracking-tight text-white">
+                    <p className="mt-2 text-4xl font-bold tracking-tight text-white break-words">
                       <AnimatedNumber to={stat.mainValue} suffix={stat.suffix} />
                     </p>
-                    <div className="mt-2 flex items-center gap-x-2">
+                    <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
                       <ArrowTrendingUpIcon className="h-5 w-5 text-green-400" />
                       <span className="text-sm font-medium text-green-400">+{stat.percentageGrowth.toLocaleString()}%</span>
-                      <span className="text-sm text-gray-500">{stat.previousValue}</span>
+                      <span className="text-sm text-gray-500 break-all">{stat.previousValue}</span>
                     </div>
                   </div>
                 </div>
@@ -197,8 +197,8 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                         whileHover={{y: -4, backgroundColor: 'rgba(255, 255, 255, 0.1)'}}
                         className="rounded-lg bg-white/5 p-4"
                       >
-                        <p className="font-semibold text-white">{box.title}</p>
-                        <p className="mt-1 text-sm text-gray-300">{box.text || ''}</p>
+                        <p className="font-semibold text-white break-words">{box.title}</p>
+                        <p className="mt-1 text-sm text-gray-300 break-words">{box.text || ''}</p>
                       </motion.div>
                     ))}
                     </div>
@@ -215,7 +215,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                         className="flex flex-col items-center text-center"
                       >
                         <p className="text-sm text-gray-400">{sub.label}</p>
-                        <p className="mt-1 text-xl font-semibold text-white">{sub.value}</p>
+                        <p className="mt-1 text-xl font-semibold text-white break-all">{sub.value}</p>
                       </motion.div>
                     ))}
                   </div>

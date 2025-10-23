@@ -106,8 +106,20 @@ export default function ContactClient({ contactInfo }: ContactClientProps) {
             <motion.div variants={columnVariants}>
               <h3 className="text-2xl font-semibold text-white">{contactInfo.infoBoxTitle || 'Contact Information'}</h3>
               <div className="mt-6 space-y-4 text-base leading-7 text-gray-300">
-                {contactInfo.phone && <div className="flex gap-x-4"><span>Phone:</span><span>{contactInfo.phone}</span></div>}
-                {contactInfo.email && <div className="flex gap-x-4"><span>Email:</span><a href={`mailto:${contactInfo.email}`} className="hover:text-white">{contactInfo.email}</a></div>}
+                {contactInfo.phone && (
+                  <div className="flex gap-x-4">
+                    <span className="flex-shrink-0">Phone:</span>
+                    <span className="break-all">{contactInfo.phone}</span>
+                  </div>
+                )}
+                {contactInfo.email && (
+                  <div className="flex gap-x-4">
+                    <span className="flex-shrink-0">Email:</span>
+                    <a href={`mailto:${contactInfo.email}`} className="break-all hover:text-white">
+                      {contactInfo.email}
+                    </a>
+                  </div>
+                )}
               </div>
               <div className="mt-10 border-t border-white/10 pt-10">
                 <h3 className="text-lg font-semibold text-white">{contactInfo.socialsTitle || 'Follow Us'}</h3>
