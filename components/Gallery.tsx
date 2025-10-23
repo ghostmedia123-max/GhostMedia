@@ -135,15 +135,15 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                 {customer.mediaItems && customer.mediaItems.length > 0 && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
-                    className="flex w-auto -ml-px"
-                    columnClassName="pl-px bg-clip-padding"
+                    className="flex w-auto -ml-2"
+                    columnClassName="pl-2 bg-clip-padding"
                   >
                     {customer.mediaItems.map((item, index) => (
                       <motion.div
                         key={item._key || index}
                         variants={itemVariants}
                         layoutId={item._key}
-                        className="mb-px break-inside-avoid cursor-pointer overflow-hidden"
+                        className="mb-2 break-inside-avoid cursor-pointer overflow-hidden"
                         whileHover={{scale: 1.05, zIndex: 10}}
                         transition={{type: 'spring', stiffness: 300}}
                         onClick={() => setSelectedMedia(item)}
