@@ -11,16 +11,15 @@ import introduction from './schemaTypes/introduction'
 import gallerySection from './schemaTypes/gallerySection'
 import galleryItem from './schemaTypes/galleryItem'
 import portfolioItem from './schemaTypes/portfolioItem'
-import service from './schemaTypes/service'
 import statistics from './schemaTypes/statistics'
-import servicesSection from './schemaTypes/servicesSection'
 import strategySection from './schemaTypes/strategySection'
 import toolsSection from './schemaTypes/toolsSection'
 import detailedStatistics from './schemaTypes/detailedStatistics'
-import customerGallery from './schemaTypes/customerGallery'
-import customerGallerySection from './schemaTypes/customerGallerySection'
+import service from './schemaTypes/service'
+import servicesManagement from './schemaTypes/servicesManagement'
+import galleryPage from './schemaTypes/galleryPage'
+import galleryCustomer from './schemaTypes/galleryCustomer'
 import page from './schemaTypes/page'
-import moreServices from './schemaTypes/moreServices'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
   types: [
@@ -36,15 +35,14 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     hero,
     introduction,
     portfolioItem,
-    service,
-    servicesSection,
     statistics,
     strategySection,
     toolsSection,
     detailedStatistics,
-    customerGallery,
-    customerGallerySection,
+    service,
+    servicesManagement,
+    galleryPage,
+    galleryCustomer,
     page,
-    moreServices,
   ],
 }

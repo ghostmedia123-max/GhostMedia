@@ -58,12 +58,13 @@ export async function getAboutPage() {
       headline,
       sections[]{..., backgroundImage},
       seo,
-      detailedStatistics{
+      detailedStatistics->{
         title,
         stats[]{
           _key,
           label,
           mainValue,
+          suffix,
           percentageGrowth,
           previousValue,
           progressRing,
@@ -100,12 +101,12 @@ export async function getAllStatistics() {
 
 export async function getServicesData() {
   try {
-    // Fetches all documents of type 'service'
-    const query = groq`*[_type == "service"] | order(number asc) {
-      ..., features, shortDescription, serviceIcon, ctaText, ctaLink
+    // Fetches services selected for the homepage
+    const query = groq`*[_type == "servicesManagement"][0]{
+      "services": homepageServices[]->{...}
     }`;
-    const data = await client.fetch<Service[]>(query);
-    return data && data.length > 0 ? data : (servicesDefaults as Service[]);
+    const data = await client.fetch<{services: Service[]}>(query);
+    return data?.services || []; // Return an empty array if no services are found
   } catch (error) {
     console.error('Failed to fetch services data:', error);
     return servicesDefaults as Service[];
@@ -114,11 +115,10 @@ export async function getServicesData() {
 
 export async function getServicesSectionData() {
   try {
-    const query = groq`*[_type == "servicesSection"][0]{
-      ..., backgroundImage
+    const query = groq`*[_type == "servicesManagement"][0]{ 
+      "title": homepageSectionTitle, "description": homepageSectionDescription, "backgroundImage": homepageBackgroundImage 
     }`;
-    const data = await client.fetch(query);
-    return data;
+    return await client.fetch(query);
   } catch (error) {
     console.error('Failed to fetch services section data:', error);
     return null;
@@ -336,8 +336,8 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
 
 export async function getGallerySectionData(): Promise<GallerySectionData | null> {
   try {
-    const query = groq`*[_type == "servicesSection"][0]{
-      ..., backgroundImage
+    const query = groq`*[_type == "gallerySection"][0]{
+      title, description
     }`;
     const data = await client.fetch(query);
     return data;
@@ -386,11 +386,36 @@ export async function getDetailedStatistics() {
   }
 }
 
-export async function getCustomerGalleries() {
+export async function getMoreServicesData(): Promise<MoreServicesData | null> {
   try {
-    const query = groq`*[_type == "customerGallery"] | order(order asc, _createdAt desc) {
+    const query = groq`*[_type == "servicesManagement"][0]{
+      "title": aboutPageSectionTitle,
+      "backgroundImage": aboutPageBackgroundImage,
+      "services": aboutPageServices[]->{...}
+    }`;
+    return await client.fetch<MoreServicesData>(query, {}, {cache: 'no-store'});
+  } catch (error) {
+    console.error('Failed to fetch "More Services" section data:', error);
+    return null;
+  }
+}
+
+export async function getGalleryPageData() {
+  try {
+    const query = groq`*[_type == "galleryPage"][0]`;
+    return await client.fetch(query, {}, {cache: 'no-store'});
+  } catch (error) {
+    console.error('Failed to fetch gallery page data:', error);
+    return null;
+  }
+}
+
+export async function getGalleryCustomers() {
+  try {
+    const query = groq`*[_type == "galleryCustomer"] | order(order asc, _createdAt desc) {
       _id,
-      customerName,
+      name,
+      backgroundImage,
       mediaItems[]{
         ...,
         "videoUrl": asset->url
@@ -398,32 +423,7 @@ export async function getCustomerGalleries() {
     }`;
     return await client.fetch(query, {}, {cache: 'no-store'});
   } catch (error) {
-    console.error('Failed to fetch customer galleries:', error);
+    console.error('Failed to fetch gallery customers:', error);
     return [];
-  }
-}
-
-export async function getCustomerGallerySectionData() {
-  try {
-    const query = groq`*[_type == "customerGallerySection"][0]{
-      title, backgroundImage
-    }`;
-    return await client.fetch(query);
-  } catch (error) {
-    console.error('Failed to fetch customer gallery section data:', error);
-    return null;
-  }
-}
-
-export async function getMoreServicesData(): Promise<MoreServicesData | null> {
-  try {
-    const query = groq`*[_type == "moreServices"][0]{
-      title,
-      backgroundImage
-    }`;
-    return await client.fetch<MoreServicesData>(query);
-  } catch (error) {
-    console.error('Failed to fetch "More Services" section data:', error);
-    return null;
   }
 }

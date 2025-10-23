@@ -38,6 +38,12 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
+              name: 'suffix',
+              title: 'Suffix',
+              type: 'string',
+              description: 'An optional suffix to display after the main value (e.g., "k", "%", "+").',
+            }),
+            defineField({
               name: 'percentageGrowth',
               title: 'Percentage Growth',
               type: 'number',
@@ -106,6 +112,32 @@ export default defineType({
                   ],
                 },
               ],
+            }),
+            defineField({
+              name: 'descriptionBoxes',
+              title: 'Description Boxes',
+              type: 'array',
+              description: '(Optional) Add up to two description boxes that appear to the right of the main stat.',
+              of: [
+                {
+                  name: 'descriptionBox',
+                  title: 'Description Box',
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'title',
+                      title: 'Title',
+                      type: 'string',
+                    }),
+                    defineField({
+                      name: 'text',
+                      title: 'Description',
+                      type: 'text',
+                    }),
+                  ],
+                },
+              ],
+              validation: (Rule) => Rule.max(2),
             }),
           ],
         },

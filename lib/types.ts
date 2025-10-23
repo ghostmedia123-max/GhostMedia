@@ -133,6 +133,20 @@ export interface GallerySectionData {
   description?: string;
 }
 
+export interface GalleryPageData {
+  title?: string;
+  description?: string;
+  backgroundImage?: SanityImage;
+}
+
+export interface GalleryCustomerData {
+  _id: string;
+  name: string;
+  order?: number;
+  backgroundImage?: SanityImage;
+  mediaItems?: GalleryMediaItem[];
+}
+
 export interface FooterData {
   siteName?: string;
   siteIcon?: SanityImage;
@@ -165,6 +179,7 @@ export interface DetailedStat {
   _key: string;
   label: string;
   mainValue: string;
+  suffix?: string;
   percentageGrowth: number;
   previousValue?: string;
   progressRing?: {
@@ -183,6 +198,8 @@ export interface DescriptionBox {
   text: string;
 }
 
+export type GalleryMediaItem = SanityImage | SanityVideo;
+
 export interface SanityVideo {
   _key: string;
   _type: 'videoItem';
@@ -193,16 +210,10 @@ export interface SanityVideo {
   videoUrl?: string;
 }
 
-export type CustomerGalleryItem = SanityImage | SanityVideo;
-
-export interface CustomerGallerySectionData {
-  title?: string;
-  backgroundImage?: SanityImage;
-}
-
 export interface MoreServicesData {
   title?: string;
   backgroundImage?: SanityImage;
+  services?: Service[];
 }
 
 export interface DetailedStatisticsData {

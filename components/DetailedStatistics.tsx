@@ -61,7 +61,7 @@ function AnimatedNumber({to, suffix = ''}: {to: string; suffix?: string}) {
 
   return (
     <>
-      <span ref={ref}>{to}</span>
+      <span ref={ref}>0</span>
       {suffix}
     </>
   )
@@ -76,26 +76,20 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
   const ref = useRef(null)
   const isInView = useInView(ref, {amount: 0.5})
   const primaryControls = useAnimationControls()
-  const secondaryControls = useAnimationControls()
   const radius = 36
   const circumference = 2 * Math.PI * radius
 
   useEffect(() => {
     if (isInView) {
       primaryControls.start({
-        strokeDashoffset: circumference * (1 - primary / 100),
-        transition: {duration: 1, ease: 'easeOut'},
-      })
-      secondaryControls.start({
-        strokeDashoffset: circumference * (1 - (primary + secondary) / 100),
+        strokeDashoffset: circumference * (1 - (primary || 0) / 100),
         transition: {duration: 1, ease: 'easeOut'},
       })
     } else {
       // Reset animations when out of view
       primaryControls.start({strokeDashoffset: circumference, transition: {duration: 0}})
-      secondaryControls.start({strokeDashoffset: circumference, transition: {duration: 0}})
     }
-  }, [isInView, primary, secondary, circumference, primaryControls, secondaryControls])
+  }, [isInView, primary, circumference, primaryControls])
 
   return (
     <motion.div
@@ -113,6 +107,18 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
       </motion.div>
       <svg className="h-full w-full" viewBox="0 0 80 80">
         <circle cx="40" cy="40" r={radius} fill="transparent" stroke="#1f2937" strokeWidth="8" />
+        {/* Blue/Secondary arc - drawn first to fill the whole ring */}
+        <circle
+          cx="40"
+          cy="40"
+          r={radius}
+          fill="transparent"
+          stroke="#3b82f6"
+          strokeWidth="8"
+          strokeLinecap="round"
+          transform="rotate(-90 40 40)"
+        />
+        {/* White/Primary arc - drawn on top of the blue one */}
         <motion.circle
           cx="40"
           cy="40"
@@ -124,19 +130,6 @@ function ProgressRing({primary, secondary}: {primary: number; secondary: number}
           transform="rotate(-90 40 40)"
           strokeDasharray={circumference}
           animate={primaryControls}
-          initial={{strokeDashoffset: circumference}}
-        />
-        <motion.circle
-          cx="40"
-          cy="40"
-          r={radius}
-          fill="transparent"
-          stroke="#3b82f6"
-          strokeWidth="8"
-          strokeLinecap="round"
-          transform="rotate(-90 40 40)"
-          strokeDasharray={circumference}
-          animate={secondaryControls}
           initial={{strokeDashoffset: circumference}}
         />
       </svg>
@@ -187,7 +180,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-400">{stat.label}</p>
                     <p className="mt-2 text-4xl font-bold tracking-tight text-white">
-                      <AnimatedNumber to={stat.mainValue} />
+                      <AnimatedNumber to={stat.mainValue} suffix={stat.suffix} />
                     </p>
                     <div className="mt-2 flex items-center gap-x-2">
                       <ArrowTrendingUpIcon className="h-5 w-5 text-green-400" />
@@ -205,7 +198,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                         className="rounded-lg bg-white/5 p-4"
                       >
                         <p className="font-semibold text-white">{box.title}</p>
-                        <p className="mt-1 text-sm text-gray-300">{box.text}</p>
+                        <p className="mt-1 text-sm text-gray-300">{box.text || ''}</p>
                       </motion.div>
                     ))}
                     </div>

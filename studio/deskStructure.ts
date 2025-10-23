@@ -57,26 +57,15 @@ export const deskStructure = (S: StructureBuilder) =>
         .title('Content Top Carousel')
         .id('contentTopCarousel')
         .child(S.document().schemaType('carousel').documentId('contentTopCarousel')),
-      S.listItem()
-        .title('Services Section')
-        .id('servicesSection')
-        .child(S.document().schemaType('servicesSection').documentId('servicesSection')),
-      S.listItem()
-        .title('Customer Gallery Section')
-        .id('customerGallerySection')
-        .child(S.document().schemaType('customerGallerySection').documentId('customerGallerySection')),
-      S.listItem()
-        .title('More Services Section')
-        .id('moreServices')
-        .child(S.document().schemaType('moreServices').documentId('moreServices')),
+      S.listItem().title('Gallery Page').id('galleryPage').child(S.document().schemaType('galleryPage').documentId('galleryPage')),
+      S.listItem().title('Services Management').id('servicesManagement').child(S.document().schemaType('servicesManagement').documentId('servicesManagement')),
 
       // Divider
       S.divider(),
 
       // Repeatable documents
-      S.documentTypeListItem('service').title('Services'),
       S.documentTypeListItem('portfolioItem').title('Portfolio Items'),
-      S.documentTypeListItem('customerGallery').title('Customer Galleries'),
+      S.documentTypeListItem('galleryCustomer').title('Gallery Customers'),
       S.documentTypeListItem('page').title('Pages'),
 
       // The rest of the document types, filtered to exclude the singletons
@@ -96,13 +85,11 @@ export const deskStructure = (S: StructureBuilder) =>
             'aboutHero',
             'contentHero',
             'contentTopCarousel',
-            'servicesSection',
-            'service',
             'portfolioItem',
-            'customerGallery',
-            'moreServices',
+            'servicesManagement',
+            'galleryPage',
+            'galleryCustomer',
             'page',
-            'customerGallerySection',
           ].includes(listItem.getId() || ''),
       ),
     ])

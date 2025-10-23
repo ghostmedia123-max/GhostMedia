@@ -12,8 +12,6 @@ interface ServicesGridProps {
 }
 
 export default function ServicesGrid({ services, sectionData }: ServicesGridProps) {
-  if (!services || services.length === 0) return null;
-
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: 0.2 });
   const controls = useAnimationControls();
