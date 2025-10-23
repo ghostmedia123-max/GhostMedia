@@ -1,11 +1,15 @@
-export { default } from "next-auth/middleware"
+import {withAuth} from 'next-auth/middleware'
 
-// This configures the middleware to run on the specified paths.
-// It will protect the /admin route and all of its sub-routes.
+export default withAuth({
+  callbacks: {
+    authorized: ({token}) => {
+      // The token will exist if the user is authenticated
+      return !!token
+    },
+  },
+})
+
 export const config = {
-  // Match all routes under /admin, except for the /admin/login page.
-  // This protects:
-  // 1. The root /admin page.
-  // 2. All sub-paths (/admin/...) except for /admin/login.
-  matcher: ['/admin', '/admin/:path((?!login).*)'],
-};
+  // Protect the /admin route
+  matcher: ['/admin'],
+}
