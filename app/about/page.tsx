@@ -1,4 +1,4 @@
-import {getAboutPage, getAboutHeroData, getMoreServicesData} from '@/lib/data'
+import {getAboutPage, getMoreServicesData} from '@/lib/data'
 import { Metadata } from 'next';
 import {
   HeroData,
@@ -6,7 +6,7 @@ import {
   AboutPageData,
   AboutSection as AboutSectionType,
 } from '@/lib/types';
-import Hero from '@/components/Hero';
+// import Hero from '@/components/Hero';
 
 import AboutSection from '@/components/AboutSection';
 import DetailedStatistics from '@/components/DetailedStatistics'
@@ -31,9 +31,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [aboutData, aboutHeroData, moreServicesData] = await Promise.all([
+  const [aboutData, moreServicesData] = await Promise.all([
     getAboutPage(),
-    getAboutHeroData(),
+    // getAboutHeroData(),
     getMoreServicesData(),
   ])
 
@@ -42,7 +42,7 @@ export default async function AboutPage() {
 
   return (
     <div className="flex flex-col">
-      <Hero data={aboutHeroData} />
+      {/* <Hero data={aboutHeroData} /> */}
 
       {/* 2. About Body Sections */}
       {aboutData?.sections?.map((section: AboutSectionType, index: number) => (

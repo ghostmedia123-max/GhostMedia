@@ -1,7 +1,7 @@
-import { getContactInfo, getContactHeroData } from '@/lib/data';
+import { getContactInfo } from '@/lib/data';
 import { ContactInfoData, HeroData, SanitySeo } from '@/lib/types';
 import { Metadata } from 'next';
-import Hero from '@/components/Hero';
+// import Hero from '@/components/Hero';
 import ContactClient from '@/components/ContactClient';
 
 interface ContactHeroData extends HeroData {
@@ -11,9 +11,9 @@ interface ContactHeroData extends HeroData {
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const contactHeroData: ContactHeroData = (await getContactHeroData()) || {};
-  const title = contactHeroData.seo?.metaTitle || 'Contact Us';
-  const description = contactHeroData.seo?.metaDescription || 'Get in touch with us for any questions or project inquiries.';
+  // const contactHeroData: ContactHeroData = (await getContactHeroData()) || {};
+  const title = 'Contact Us';
+  const description = 'Get in touch with us for any questions or project inquiries.';
 
   return {
     title,
@@ -26,10 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const [contactInfo, contactHeroData] = await Promise.all([
+  const [contactInfo] = await Promise.all([
     getContactInfo(),
-    getContactHeroData(),
-  ]) as [ContactInfoData, HeroData];
+    // getContactHeroData(),
+  ]) as [ContactInfoData];
 
   const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
@@ -53,7 +53,7 @@ export default async function ContactPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Hero data={contactHeroData} />
+      {/* <Hero data={contactHeroData} /> */}
 
       {contactInfo && (
         <ContactClient contactInfo={contactInfo} />

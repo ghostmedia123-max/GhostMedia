@@ -13,6 +13,13 @@ export interface SanitySeo {
   metaDescription?: string;
 }
 
+export interface HeaderHeroData {
+  _type: 'headerHero';
+  page?: string;
+  backgroundImage?: SanityImage;
+  // We will add more fields like headline, subtext, etc. here
+}
+
 export interface AboutSection {
   _key: string;
   title: string;
@@ -121,6 +128,11 @@ export interface StrategyStep {
   description?: string;
 }
 
+export interface StrategySectionData {
+  title: string;
+  steps: StrategyStep[];
+}
+
 export interface GalleryItem {
   _id: string;
   title?: string;
@@ -220,4 +232,20 @@ export interface DetailedStatisticsData {
   title?: string;
   stats?: DetailedStat[];
   descriptionBoxes?: DescriptionBox[];
+}
+
+export interface Pageview {
+  _id: string;
+  path: string;
+  timestamp: string;
+  userAgent?: string;
+  geo?: {
+    country?: string;
+    city?: string;
+  };
+}
+
+export interface AnalyticsData {
+  pageviews: Pageview[];
+  total: number;
 }

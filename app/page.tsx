@@ -1,5 +1,6 @@
 import ServicesGrid from '@/components/ServicesGrid';
-import Hero from '@/components/Hero';
+// import Hero from '@/components/Hero';
+import HeaderHero from '@/components/HeaderHero';
 import { Metadata } from 'next';
 import { urlFor } from '@/lib/client';
 import StatsPreview from '@/components/StatsPreview';
@@ -8,7 +9,7 @@ import MiniContactCTA from '@/components/MiniContactCTA';
 import ToolsSection from '@/components/ToolsSection';
 import StrategySection from '@/components/StrategySection';
 import {
-  getHeroData,
+  getHeaderHeroData,
   getServicesData,
   getIntroductionData,
   getServicesSectionData,
@@ -21,15 +22,15 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   // Fetch data for metadata
-  const heroData = (await getHeroData()) || {};
-  const { seo } = heroData;
+  // const heroData = (await getHeroData()) || {};
+  // const { seo } = heroData;
 
-  const ogImage = heroData.backgroundImage?.asset
-    ? urlFor(heroData.backgroundImage).width(1200).height(630).url()
-    : 'https://your-default-og-image.com/image.png'; // A fallback image
+  // const ogImage = heroData.backgroundImage?.asset
+  //   ? urlFor(heroData.backgroundImage).width(1200).height(630).url()
+  //   : 'https://your-default-og-image.com/image.png'; // A fallback image
 
-  const title = seo?.metaTitle || heroData.headline || 'Home';
-  const description = seo?.metaDescription || heroData.tagline || 'Welcome to our website.';
+  const title = 'Home'; // seo?.metaTitle || heroData.headline || 'Home';
+  const description = 'Welcome to our website.'; // seo?.metaDescription || heroData.tagline || 'Welcome to our website.';
 
   return {
     title,
@@ -38,8 +39,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: 'website',
-      url: '/', // The canonical URL for this page
-      images: [{ url: ogImage }],
+      url: '/', // The canonical URL for this page,
+      // images: [{ url: ogImage }],
     },
   };
 }
@@ -48,9 +49,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   // Fetch the data needed for the components on this page
   // Using Promise.all to fetch data concurrently for better performance
-  const [servicesResult, heroResult, statsResult, introResult, toolsResult, strategyResult, servicesSectionResult] = await Promise.all([
+  const [headerHeroResult, servicesResult, statsResult, introResult, toolsResult, strategyResult, servicesSectionResult] = await Promise.all([
+    getHeaderHeroData('home'),
     getServicesData(),
-    getHeroData(),
     getStatisticsData(),
     getIntroductionData(),
     getToolsSectionData(),
@@ -60,7 +61,7 @@ export default async function HomePage() {
 
   // Provide individual fallbacks to ensure page renders even if some data is missing
   const servicesData = servicesResult || [];
-  const heroData = heroResult || {};
+  const headerHeroData = headerHeroResult || { _type: 'headerHero' };
   const servicesSectionData = servicesSectionResult || null;
   const statsData = statsResult || [];
   const introData = introResult || {};
@@ -69,7 +70,7 @@ export default async function HomePage() {
   return (
     <main className="bg-black">
       <div className="overflow-hidden">
-        <Hero data={heroData} />
+        <HeaderHero data={headerHeroData} />
         <Introduction data={introData} />
         <ServicesGrid sectionData={servicesSectionData} services={servicesData} />
         <StrategySection data={strategyData} />

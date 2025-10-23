@@ -1,6 +1,29 @@
-import { createClient, groq } from 'next-sanity';
+import { groq } from 'next-sanity';
 import { client } from './client';
-import { MoreServicesData } from './types';
+import {
+  Service,
+  Statistic,
+  IntroductionData,
+  Tool,
+  StrategyStep,
+  ToolsSectionData,
+  StrategySectionData,
+  ServicesSectionData,
+  AboutPageData,
+  MoreServicesData,
+  ContactInfoData,
+  HeroData,
+  HeaderHeroData,
+  GalleryPageData,
+  GalleryCustomerData,
+  CarouselData,
+  FooterData,
+  Submission,
+  AnalyticsData,
+  PortfolioItem,
+  GalleryItem,
+  GallerySectionData,
+} from './types';
 // Default content from local JSON files
 import heroDefaults from '@/defaults/hero-default.json';
 import statsDefaults from '@/defaults/stats-default.json';
@@ -8,21 +31,16 @@ import portfolioDefaults from '@/defaults/portfolio-default.json';
 import introductionDefaults from '@/defaults/introduction-default.json';
 import contactDefaults from '@/defaults/contact-default.json';
 import servicesDefaults from '@/defaults/services-default.json';
-import {
-  HeroData,
-  Statistic,
-  PortfolioItem,
-  ContactInfoData,
-  IntroductionData,
-  Service,
-  ToolsSectionData,
-  StrategyStep,
-  FooterData,
-  CarouselData,
-  GalleryItem,
-  GallerySectionData,
-} from './types';
 import clientPromise from '@/lib/mongodb';
+
+// Reusable GROQ projection for SEO fields
+const seoProjection = `
+  "seo": {
+    "metaTitle": seo.metaTitle,
+    "metaDescription": seo.metaDescription,
+    "ogImage": ogImage.asset->url
+  }
+`;
 
 // This function was previously in layout.tsx, moving it here for consistency.
 export async function getContactInfo() {
@@ -33,6 +51,17 @@ export async function getContactInfo() {
   } catch (error) {
     console.error('Failed to fetch contact info:', error);
     return contactDefaults as ContactInfoData;
+  }
+}
+
+export async function getHeaderHeroData(page: string): Promise<HeaderHeroData | null> {
+  const query = groq`*[_type == "headerHero" && page == $page][0]`;
+  try {
+    const data = await client.fetch(query, { page });
+    return data;
+  } catch (error) {
+    console.error(`Error fetching header hero data for page "${page}":`, error);
+    return null;
   }
 }
 
@@ -205,7 +234,10 @@ export async function getStrategySectionData(): Promise<{ title: string; steps: 
 
 export async function getContactHeroData() {
   try {
-    const query = groq`*[_type == "contactHero"][0]`;
+    const query = groq`*[_type == "hero" && pageIdentifier == "contact"][0]{
+      ...,
+      ${seoProjection}
+    }`;
     const data = await client.fetch<HeroData>(query);
     return data || (heroDefaults as unknown as HeroData);
   } catch (error) {
@@ -216,7 +248,10 @@ export async function getContactHeroData() {
 
 export async function getAboutHeroData() {
   try {
-    const query = groq`*[_type == "aboutHero"][0]`;
+    const query = groq`*[_type == "hero" && pageIdentifier == "about"][0]{
+      ...,
+      ${seoProjection}
+    }`;
     const data = await client.fetch<HeroData>(query);
     return data || (heroDefaults as unknown as HeroData);
   } catch (error) {
@@ -227,13 +262,14 @@ export async function getAboutHeroData() {
 
 export async function getContentHeroData() {
   try {
-    const query = groq`*[_type == "contentHero"][0]{
+    const query = groq`*[_type == "hero" && pageIdentifier == "content"][0]{
       headline,
       tagline,
       subtext,
       backgroundImage,
       ctaText,
-      ctaLink
+      ctaLink,
+      ${seoProjection}
     }`;
     const data = await client.fetch<HeroData>(query);
     return data || (heroDefaults as unknown as HeroData);
@@ -370,6 +406,27 @@ export async function getAnalyticsSummary() {
   } catch (error) {
     console.error('Failed to fetch analytics summary:', error);
     return { pageviewsLast7Days: 0, pageviewsLast30Days: 0, pageviewsLast90Days: 0, submissionCount: 0 };
+  }
+}
+
+export async function getAnalyticsData(page: number = 1, limit: number = 20): Promise<AnalyticsData> {
+  try {
+    const client = await clientPromise;
+    const db = client.db();
+    const skip = (page - 1) * limit;
+
+    const pageviews = await db.collection('pageviews')
+      .find({})
+      .sort({ timestamp: -1 })
+      .skip(skip)
+      .limit(limit)
+      .toArray();
+
+    const total = await db.collection('pageviews').countDocuments();
+    return { pageviews: JSON.parse(JSON.stringify(pageviews)), total };
+  } catch (error) {
+    console.error('Failed to fetch analytics data:', error);
+    return { pageviews: [], total: 0 };
   }
 }
 

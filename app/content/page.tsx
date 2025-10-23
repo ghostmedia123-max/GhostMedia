@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
-import { getContentHeroData, getTopCarouselData, getGalleryPageData, getGalleryCustomers } from '@/lib/data';
+import { getTopCarouselData, getGalleryPageData, getGalleryCustomers } from '@/lib/data';
 import { HeroData, CarouselData, SanitySeo } from '@/lib/types';
 import Carousel from '@/components/Carousel';
-import Hero from '@/components/Hero';
+// import Hero from '@/components/Hero';
 import Gallery from '@/components/Gallery';
 
 interface ContentHeroData extends HeroData {
@@ -13,9 +13,9 @@ interface ContentHeroData extends HeroData {
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const contentHeroData: ContentHeroData = (await getContentHeroData()) || {};
-  const title = contentHeroData.seo?.metaTitle || 'Our Content';
-  const description = contentHeroData.seo?.metaDescription || 'Explore our services and browse our portfolio of recent work.';
+  // const contentHeroData: ContentHeroData = (await getContentHeroData()) || {};
+  const title = 'Our Content';
+  const description = 'Explore our services and browse our portfolio of recent work.';
   return {
     title,
     description,
@@ -28,8 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContentPage() {
   // Fetch all data concurrently for performance
-  const [contentHeroData, topCarouselData, galleryPageData, galleryCustomers] = await Promise.all([
-    getContentHeroData(),
+  const [topCarouselData, galleryPageData, galleryCustomers] = await Promise.all([
+    // getContentHeroData(),
     getTopCarouselData(),
     getGalleryPageData(),
     getGalleryCustomers(),
@@ -38,7 +38,7 @@ export default async function ContentPage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <Hero data={contentHeroData as HeroData} />
+      {/* <Hero data={contentHeroData as HeroData} /> */}
       <div className="bg-black text-white">
       <main>
         {/* Top Carousel Section */}
