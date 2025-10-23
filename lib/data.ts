@@ -58,7 +58,7 @@ export async function getHeaderHeroData(page: string): Promise<HeaderHeroData | 
   const documentId = `headerHero_${page}`;
   const query = groq`*[_type == "headerHero" && _id == $documentId][0]`;
   try {
-    const data = await client.fetch(query, { documentId });
+    const data = await client.fetch(query, { documentId }, { cache: 'no-store' });
     return data;
   } catch (error) {
     console.error(`Error fetching header hero data for page "${page}":`, error);

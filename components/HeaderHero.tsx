@@ -42,8 +42,6 @@ function HeroContent({ data }: HeaderHeroProps) {
 
   return (
     <section ref={ref} className="relative flex h-screen items-center justify-center bg-[#000c49] text-white overflow-hidden">
-      {/* Inset border overlay */}
-      <div className="absolute inset-4 z-20 rounded-xl border-2 border-white/20 pointer-events-none" />
 
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
