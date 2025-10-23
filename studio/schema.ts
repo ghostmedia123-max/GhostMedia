@@ -43,7 +43,6 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     servicesManagement,
     galleryPage,
     galleryCustomer,
-    footer,
     page,
   ],
 }

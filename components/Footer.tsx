@@ -74,7 +74,7 @@ export default function Footer({ data }: FooterProps) {
     },
   };
 
-  const {siteName, siteIcon, description, socialLinks, privacyPolicySlug, termsOfServiceSlug} = data
+  const {siteName, siteIcon, description, socialLinks, privacyPolicySlug, termsOfServiceSlug} = data || {};
 
   const navigation = {
     main: [
