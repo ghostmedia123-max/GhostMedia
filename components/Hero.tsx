@@ -52,16 +52,18 @@ export default function Hero({data}: HeroProps) {
       ref={ref}
       className="relative flex h-screen items-center justify-center bg-[#000c49] text-white overflow-hidden"
     >
-      {data.backgroundImage?.asset && (
-        <Image
-          src={urlFor(data.backgroundImage).url()}
-          alt={data.backgroundImage.alt || 'Hero background image'}
-          fill
-          className="object-cover"
-          priority
-        />
-      )}
-      <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay for text readability */}
+      <div className="absolute inset-0 z-0">
+        {data.backgroundImage?.asset && (
+          <Image
+            src={urlFor(data.backgroundImage).url()}
+            alt={data.backgroundImage.alt || 'Hero background image'}
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
+        <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay for text readability */}
+      </div>
       <motion.div
         className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8"
         variants={containerVariants}
