@@ -166,10 +166,10 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
               whileHover={{scale: 1.03, transition: {type: 'spring', stiffness: 300}}}
               className="rounded-xl bg-[#000c49]/50 p-6 ring-1 ring-white/10"
             >
-              <div className="flex flex-col gap-y-6 sm:flex-row sm:items-start sm:justify-between sm:gap-x-8">
-                <div className="flex flex-1 items-start gap-x-6">
+              <div className="flex flex-col gap-y-8 lg:flex-row lg:items-start lg:justify-between lg:gap-x-8">
+                <div className="flex flex-1 flex-col gap-y-6 sm:flex-row sm:items-start sm:gap-x-6">
                   {stat.progressRing && (
-                    <div className="flex flex-shrink-0 items-center gap-x-4">
+                    <div className="flex flex-shrink-0 items-center justify-center gap-x-4 sm:flex-col sm:items-start sm:gap-y-2">
                       <ProgressRing primary={stat.progressRing.primaryValue} secondary={stat.progressRing.secondaryValue} />
                       <div className="text-sm">
                         <p className="flex items-center gap-x-2 text-white"><span className="h-2 w-2 rounded-full bg-white"></span> {stat.progressRing.primaryLabel}</p>
@@ -190,7 +190,7 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   </div>
                 </div>
                 {stat.descriptionBoxes && stat.descriptionBoxes.length > 0 && (
-                  <div className="grid w-full flex-1 grid-cols-1 gap-4 sm:w-auto sm:grid-cols-2">
+                  <div className="grid w-full flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:w-auto">
                     {stat.descriptionBoxes.map(box => (
                       <motion.div
                         key={box._key}
