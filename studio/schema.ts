@@ -5,7 +5,6 @@ import contactHero from './schemaTypes/contactHero'
 import contactInfo from './schemaTypes/contactInfo'
 import carousel from './schemaTypes/carousel'
 import contentHero from './schemaTypes/contentHero'
-import footer from './schemaTypes/footer'
 import hero from './schemaTypes/hero'
 import introduction from './schemaTypes/introduction'
 import gallerySection from './schemaTypes/gallerySection'
@@ -19,6 +18,7 @@ import service from './schemaTypes/service'
 import servicesManagement from './schemaTypes/servicesManagement'
 import galleryPage from './schemaTypes/galleryPage'
 import galleryCustomer from './schemaTypes/galleryCustomer'
+import footer from './schemaTypes/footer'
 import page from './schemaTypes/page'
 
 export const schema: {types: SchemaTypeDefinition[]} = {
@@ -43,6 +43,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     servicesManagement,
     galleryPage,
     galleryCustomer,
+    footer,
     page,
   ],
 }

@@ -159,13 +159,14 @@ export default function Footer({ data }: FooterProps) {
           </div>
         </div>
         <div className="mt-16 flex flex-col items-center justify-between border-t border-white/10 pt-8 sm:flex-row sm:mt-20 lg:mt-24">
-          <p className="text-sm leading-5 text-gray-400">&copy; {new Date().getFullYear()} GhostMediaTT. All rights reserved.</p>
-          <div className="mt-4 flex space-x-4 sm:mt-0">
+          <p className="text-sm leading-5 text-gray-400">&copy; {new Date().getFullYear()} {siteName || 'GhostMediaTT'}. All rights reserved.</p>
+          <div className="mt-4 flex items-center space-x-4 sm:mt-0">
             {privacyPolicySlug && (
               <Link href={`/legal/${privacyPolicySlug}`} className="text-sm leading-6 text-gray-400 hover:text-white">
                 Privacy Policy
               </Link>
             )}
+            {privacyPolicySlug && termsOfServiceSlug && <span className="text-gray-500">|</span>}
             {termsOfServiceSlug && (
               <Link href={`/legal/${termsOfServiceSlug}`} className="text-sm leading-6 text-gray-400 hover:text-white">
                 Terms of Service
