@@ -85,7 +85,7 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
           </motion.h2>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
             {services && services.length > 0 ? (
               services.map((service, index) => ( // Use service.number as key, fallback to index
                 <motion.div

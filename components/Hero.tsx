@@ -57,7 +57,7 @@ export default function Hero({data}: HeroProps) {
           src={urlFor(data.backgroundImage).url()}
           alt={data.backgroundImage.alt || 'Hero background image'}
           fill
-          className="object-cover w-full h-full"
+          className="object-cover"
           priority
         />
       )}

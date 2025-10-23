@@ -65,8 +65,8 @@ export default function Gallery({pageData, customers}: GalleryProps) {
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
-    700: 2,
-    500: 1,
+    700: 2, // 2 columns for tablets
+    640: 1, // 1 column for mobile
   }
 
   return (
@@ -79,14 +79,14 @@ export default function Gallery({pageData, customers}: GalleryProps) {
               src={urlFor(pageData.backgroundImage).url()}
               alt={pageData.backgroundImage.alt || 'Gallery background'}
               fill
-              className="absolute inset-0 -z-10 h-full w-full object-cover"
+              className="absolute inset-0 -z-10 object-cover"
             />
             <div className="absolute inset-0 bg-black/50 -z-10" />
           </>
         )}
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">{pageData?.title || 'Our Work'}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-6xl">{pageData?.title || 'Our Work'}</h1>
             {pageData?.description && <p className="mt-6 text-lg leading-8 text-gray-300">{pageData.description}</p>}
           </div>
           {/* Customer Navigation */}
@@ -131,7 +131,7 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                 </>
               )}
               <div className="relative z-10 mx-auto max-w-7xl space-y-12 px-6 pt-16 pb-16 sm:pt-24 sm:pb-24 lg:px-8">
-                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">{customer.name}</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">{customer.name}</h2>
                 {customer.mediaItems && customer.mediaItems.length > 0 && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}

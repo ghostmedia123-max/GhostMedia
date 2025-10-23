@@ -108,7 +108,7 @@ export default function MoreServices({data}: MoreServicesProps) {
                     )}
                     <h3 className="text-2xl font-semibold leading-8 text-white">{service.title}</h3>
                   </div>
-                  <div className="mt-6 flex flex-col justify-between md:flex-row md:gap-x-8">
+                  <div className="mt-6 flex flex-col md:flex-row md:justify-between md:gap-x-8">
                     {/* Left Column */}
                     <div className="flex-1">
                       <p className="text-base leading-7 text-gray-300">{service.description}</p>

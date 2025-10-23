@@ -33,7 +33,7 @@ export default async function AdminDashboardPage() {
   return (
     <div className="p-4 sm:p-6 lg:p-8 text-gray-800">
       <main>
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Dashboard</h1>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {stats.map((item) => (
             <div key={item.name} className="relative overflow-hidden rounded-lg bg-white px-4 pt-5 pb-6 shadow sm:px-6 sm:pt-6">
@@ -41,9 +41,9 @@ export default async function AdminDashboardPage() {
                 <div className="absolute rounded-md bg-indigo-500 p-3">
                   <item.icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
-                <p className="ml-16 truncate text-sm font-medium text-gray-500">{item.name}</p>
+                <p className="ml-14 truncate text-sm font-medium text-gray-500 sm:ml-16">{item.name}</p>
               </dt>
-              <dd className="ml-16 flex items-baseline">
+              <dd className="ml-14 flex items-baseline sm:ml-16">
                 <p className="text-2xl font-semibold text-gray-900">{item.stat.toLocaleString()}</p>
               </dd>
             </div>
@@ -58,7 +58,7 @@ export default async function AdminDashboardPage() {
               <div>
                 <div className="flex items-center gap-3">
                   <InboxArrowDownIcon className="h-8 w-8 text-indigo-500" />
-                  <h3 className="text-xl font-semibold text-gray-900">View Submissions</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">View Submissions</h3>
                 </div>
                 <p className="mt-2 text-sm text-gray-600">Manage messages and inquiries from your contact and quote forms.</p>
               </div>
@@ -67,7 +67,7 @@ export default async function AdminDashboardPage() {
               <div>
                 <div className="flex items-center gap-3">
                   <ChartBarIcon className="h-8 w-8 text-indigo-500" />
-                  <h3 className="text-xl font-semibold text-gray-900">View Analytics</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 sm:text-xl">View Analytics</h3>
                 </div>
                 <p className="mt-2 text-sm text-gray-600">Check website traffic, user engagement, and performance metrics.</p>
               </div>
