@@ -110,15 +110,10 @@ export default function Gallery({pageData, customers}: GalleryProps) {
         </div>
       </div>
 
-      <motion.div variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+      <div>
         {customers && customers.length > 0 ? (
           customers.map(customer => (
-            <motion.section
-              key={customer._id}
-              id={slugify(customer.name)}
-              variants={itemVariants}
-              className="relative scroll-mt-24"
-            >
+            <section key={customer._id} id={slugify(customer.name)} className="relative scroll-mt-24">
               {customer.backgroundImage && (
                 <>
                   <Image
@@ -164,14 +159,14 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                   </Masonry>
                 )}
               </div>
-            </motion.section>
+            </section>
           ))
         ) : (
           <motion.div variants={itemVariants} className="py-24 text-center text-gray-400">
             <p>More client work coming soon.</p>
           </motion.div>
         )}
-      </motion.div>
+      </div>
       <AnimatePresence>
         {selectedMedia && (
           <motion.div
