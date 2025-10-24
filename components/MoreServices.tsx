@@ -63,18 +63,20 @@ export default function MoreServices({data}: MoreServicesProps) {
       ref={ref}
       className="relative bg-[#000c49] py-24 sm:py-32 text-white overflow-hidden"
     >
-      {data?.backgroundImage?.asset && (
-        <>
+      {/* Background Image and Overlay */}
+      <div className="absolute inset-0 z-0 h-full w-full">
+        {data?.backgroundImage?.asset && (
           <Image
             src={urlFor(data.backgroundImage).url()}
             alt={data.backgroundImage.alt || 'More services background'}
             fill
-            className="object-cover w-full h-full"
+            className="object-cover" // Rely on 'fill' prop for sizing, 'object-cover' for aspect ratio
             priority
           />
-          <div className="absolute inset-0 bg-black opacity-50" />
-        </>
-      )}
+        )}
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black opacity-50" />
+      </div>
       <motion.div
         className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8"
         variants={containerVariants}
