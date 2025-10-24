@@ -1,11 +1,7 @@
 import {type SchemaTypeDefinition} from 'sanity'
 import about from './schemaTypes/about'
-import aboutHero from './schemaTypes/aboutHero'
-import contactHero from './schemaTypes/contactHero'
 import contactInfo from './schemaTypes/contactInfo'
 import carousel from './schemaTypes/carousel'
-import contentHero from './schemaTypes/contentHero'
-import hero from './schemaTypes/hero'
 import introduction from './schemaTypes/introduction'
 import gallerySection from './schemaTypes/gallerySection'
 import galleryItem from './schemaTypes/galleryItem'
@@ -26,25 +22,21 @@ export const schema = {
   types: [
     headerHero,
     about,
-    aboutHero,
-    contactHero,
     contactInfo,
     carousel,
-    contentHero,
     footer,
     galleryItem,
     gallerySection,
-    hero,
     introduction,
     portfolioItem,
     statistics,
     strategySection,
     toolsSection,
-    detailedStatistics,
-    service,
-    servicesManagement,
     galleryPage,
     galleryCustomer,
     page,
+    servicesManagement,
+    service,
+    detailedStatistics,
   ],
 }
