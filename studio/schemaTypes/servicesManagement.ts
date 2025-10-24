@@ -64,6 +64,13 @@ export default defineType({
               },
               validation: (Rule) => Rule.required(),
             }),
+            defineField({
+              name: 'shortDescription',
+              title: 'Short Description',
+              type: 'text',
+              rows: 2,
+              validation: (Rule) => Rule.required().max(150),
+            }),
           ],
         },
       ],

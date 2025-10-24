@@ -133,7 +133,7 @@ export async function getServicesData() {
   try {
     // Fetches services selected for the homepage
     const query = groq`*[_type == "servicesManagement"][0]{
-      "services": homepageServices[]{title, serviceIcon}
+      "services": homepageServices[]{title, serviceIcon, shortDescription}
     }`;
     const data = await client.fetch<{services: Service[]}>(query);
     return data?.services || []; // Return an empty array if no services are found
