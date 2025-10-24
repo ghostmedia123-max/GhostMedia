@@ -108,10 +108,10 @@ export default function MoreServices({data}: MoreServicesProps) {
                     )}
                     <h3 className="text-2xl font-semibold leading-8 text-white">{service.title}</h3>
                   </div>
-                  <div className="mt-6 flex flex-col md:flex-row md:justify-between md:gap-x-8">
+                  <div className="mt-6 flex flex-col gap-y-8">
                     {/* Left Column */}
-                    <div className="flex-1">
-                      <p className="text-base leading-7 text-gray-300">{service.description}</p>
+                    <div className="flex flex-1 flex-col">
+                      <p className="flex-grow text-base leading-7 text-gray-300">{service.description}</p>
                       {service.features && service.features.length > 0 && (
                         <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-300">
                           {service.features.map((feature) => (
@@ -126,7 +126,7 @@ export default function MoreServices({data}: MoreServicesProps) {
                     {/* Right Column */}
                     {service.shortDescription && (
                       <motion.div
-                        className="group mt-8 flex-shrink-0 rounded-2xl bg-gray-900/50 p-6 ring-1 ring-indigo-500/20 md:mt-0 md:w-2/5"
+                        className="group flex flex-col rounded-2xl bg-gray-900/50 p-6 ring-1 ring-indigo-500/20"
                         whileHover={{
                           backgroundColor: 'hsla(220, 13%, 28%, 0.5)', // A slightly brighter gray with 50% opacity
                         }}
