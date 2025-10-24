@@ -190,15 +190,15 @@ export default function DetailedStatistics({data}: DetailedStatisticsProps) {
                   </div>
                 </div>
                 {stat.descriptionBoxes && stat.descriptionBoxes.length > 0 && (
-                  <div className="grid w-full flex-1 grid-cols-1 gap-4 sm:grid-cols-2 lg:w-auto">
+                  <div className="grid w-full flex-1 grid-cols-1 gap-4 sm:flex sm:flex-col lg:w-auto">
                     {stat.descriptionBoxes.map(box => (
                       <motion.div
                         key={box._key}
                         whileHover={{y: -4, backgroundColor: 'rgba(255, 255, 255, 0.1)'}}
-                        className="rounded-lg bg-white/5 p-4"
+                        className="flex flex-col rounded-lg bg-gradient-to-br from-white/10 to-white/5 p-4 ring-1 ring-white/10"
                       >
-                        <p className="font-semibold text-white break-words">{box.title}</p>
-                        <p className="mt-1 text-sm text-gray-300 break-words">{box.text || ''}</p>
+                        <p className="font-semibold text-white">{box.title}</p>
+                        <p className="mt-1 text-sm text-gray-300/80">{box.text || ''}</p>
                       </motion.div>
                     ))}
                     </div>
