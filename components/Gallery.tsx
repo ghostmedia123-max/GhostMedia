@@ -156,7 +156,7 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                 {customer.mediaItems && customer.mediaItems.length > 0 && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
-                    className="w-full flex gap-x-4" // Ensure full width, use flex and gap-x for column spacing
+                    className="w-full flex gap-x-4 justify-start" // Ensure full width, use flex and gap-x for column spacing
                     columnClassName="flex flex-col gap-y-4" // Each column is a flex container for its items, with vertical gap
                   >
                     {customer.mediaItems.map((item, index) => (
