@@ -28,8 +28,8 @@ export default function StrategySection({data}: StrategySectionProps) {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.15, // This was duplicated, keeping the more fine-tuned value
-        delayChildren: 0.5, // Start animating steps after the line draws
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
@@ -51,12 +51,11 @@ export default function StrategySection({data}: StrategySectionProps) {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, rotateX: -90, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      rotateX: 0,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
+      transition: { duration: 0.4, ease: 'easeOut' },
     },
   };
 

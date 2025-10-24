@@ -2,9 +2,28 @@
 
 import { Service, ServicesSectionData } from '@/lib/types';
 import { motion, useInView, useAnimationControls, Variants } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { urlFor } from '@/lib/client';
+import {
+  Cog6ToothIcon,
+  ChartBarIcon,
+  ComputerDesktopIcon,
+  PaintBrushIcon,
+  MegaphoneIcon,
+  CameraIcon,
+  CodeBracketIcon,
+} from '@heroicons/react/24/outline';
+
+const iconMap: { [key: string]: React.ElementType } = {
+  Cog: Cog6ToothIcon,
+  ChartBar: ChartBarIcon,
+  ComputerDesktop: ComputerDesktopIcon,
+  PaintBrush: PaintBrushIcon,
+  Megaphone: MegaphoneIcon,
+  Camera: CameraIcon,
+  CodeBracket: CodeBracketIcon,
+};
 
 interface ServicesGridProps {
   services: Service[];
@@ -97,12 +116,21 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
                 >
                   <dt className="text-base font-semibold leading-7 text-white">
                     <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600 transition-all duration-300 group-hover:bg-indigo-500 group-hover:shadow-[0_0_20px_rgba(79,70,229,0.8)]">
-                      <span className="text-2xl font-bold">{String(service.number).padStart(2, '0')}</span>
+                      {service.serviceIcon && iconMap[service.serviceIcon] ? (
+                        React.createElement(iconMap[service.serviceIcon], {
+                          className: 'h-6 w-6 text-white',
+                          'aria-hidden': 'true',
+                        })
+                      ) : (
+                        <span className="text-2xl font-bold">
+                          {String(service.number).padStart(2, '0')}
+                        </span>
+                      )}
                     </div>
                     {service.title}
                   </dt>
                   <dd className="mt-2 text-base leading-7 text-gray-400">
-                    {service.description}
+                    {service.shortDescription || service.description} {/* Fallback to full description if short is not provided */}
                   </dd>
                 </motion.div>
               ))
