@@ -127,11 +127,8 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
                         </span>
                       )}
                     </div>
-                    {service.title}
+                    <span className="ml-4">{service.title}</span> {/* Added ml-4 for spacing */}
                   </dt>
-                  <dd className="mt-2 text-base leading-7 text-gray-400">
-                    {service.shortDescription || service.description} {/* Fallback to full description if short is not provided */}
-                  </dd>
                 </motion.div>
               ))
             ) : (

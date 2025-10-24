@@ -44,8 +44,29 @@ export default defineType({
       name: 'homepageServices',
       title: 'Homepage Services',
       type: 'array',
-      description: 'Select and order the services to display on the homepage grid.',
-      of: [{type: 'reference', to: [{type: 'service'}]}, {type: 'service'}],
+      description: 'A simple list of services for the homepage, with just a title and an icon.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Service Name',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'serviceIcon',
+              title: 'Icon',
+              type: 'string',
+              options: {
+                list: ['Cog', 'ChartBar', 'ComputerDesktop', 'PaintBrush', 'Megaphone', 'Camera', 'CodeBracket'],
+              },
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+        },
+      ],
       group: 'homepage',
     }),
     defineField({
