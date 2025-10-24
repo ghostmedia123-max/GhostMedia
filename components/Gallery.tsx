@@ -60,7 +60,9 @@ const slugify = (text: string) =>
 export default function Gallery({pageData, customers}: GalleryProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, {once: true, amount: 0.1})
+  const headerRef = useRef<HTMLDivElement>(null);
   const [selectedMedia, setSelectedMedia] = useState<GalleryMediaItem | null>(null)
+  const [isNavSticky, setIsNavSticky] = useState(false);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -69,10 +71,31 @@ export default function Gallery({pageData, customers}: GalleryProps) {
     640: 1, // 1 column for mobile
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        // The main navbar is 4rem (64px) high. We make the nav sticky
+        // once the bottom of the header is at the top of the viewport.
+        const { bottom } = headerRef.current.getBoundingClientRect();
+        const navbarHeight = 64;
+        if (bottom <= navbarHeight) {
+          setIsNavSticky(true);
+        } else {
+          setIsNavSticky(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div ref={ref} className="bg-[#000417] text-white min-h-screen">
       {/* Always render the header section */}
-      <div className="relative isolate overflow-hidden bg-[#000417] pt-24 sm:pt-32 pb-12">
+      <div ref={headerRef} className="relative isolate overflow-hidden bg-[#000417] pt-24 sm:pt-32 pb-12">
         {pageData?.backgroundImage?.asset && (
           <>
             <Image
@@ -89,11 +112,15 @@ export default function Gallery({pageData, customers}: GalleryProps) {
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-6xl">{pageData?.title || 'Our Work'}</h1>
             {pageData?.description && <p className="mt-6 text-lg leading-8 text-gray-300">{pageData.description}</p>}
           </div>
-          {/* Customer Navigation */}
-          {customers && customers.length > 0 && (
-            <div className="relative mx-auto max-w-7xl mt-16">
-              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#000417] to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#000417] to-transparent" />
+        </div>
+      </div>
+
+      {/* Customer Navigation */}
+      {customers && customers.length > 0 && (
+        <div className={`transition-all duration-300 ${isNavSticky ? 'fixed top-16 left-0 right-0 z-40 bg-[#000729] shadow-lg' : 'relative bg-[#000417]'}`}>
+          <div className="relative mx-auto max-w-7xl">
+            <div className={`pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r ${isNavSticky ? 'from-[#000729]' : 'from-[#000417]'} to-transparent`} />
+            <div className={`pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l ${isNavSticky ? 'from-[#000729]' : 'from-[#000417]'} to-transparent`} />
               <div className="flex items-center gap-x-4 overflow-x-auto whitespace-nowrap px-4 py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {customers.map(customer => (
                   <a
@@ -105,10 +132,9 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                   </a>
                 ))}
               </div>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div>
         {customers && customers.length > 0 ? (
@@ -130,15 +156,15 @@ export default function Gallery({pageData, customers}: GalleryProps) {
                 {customer.mediaItems && customer.mediaItems.length > 0 && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
-                    className="flex w-auto -ml-2"
-                    columnClassName="pl-2 bg-clip-padding"
+                    className="w-full flex gap-x-4" // Ensure full width, use flex and gap-x for column spacing
+                    columnClassName="flex flex-col gap-y-4" // Each column is a flex container for its items, with vertical gap
                   >
                     {customer.mediaItems.map((item, index) => (
                       <motion.div
                         key={item._key || index}
                         variants={itemVariants}
                         layoutId={item._key}
-                        className="mb-2 break-inside-avoid cursor-pointer overflow-hidden"
+                        className="break-inside-avoid cursor-pointer overflow-hidden" // Removed mb-2 as gap-y-4 handles it
                         whileHover={{scale: 1.05, zIndex: 10}}
                         transition={{type: 'spring', stiffness: 300}}
                         onClick={() => setSelectedMedia(item)}
