@@ -27,10 +27,6 @@ export const deskStructure = (S: StructureBuilder) =>
             ]),
         ),
       S.listItem()
-        .title('Hero Section')
-        .id('hero')
-        .child(S.document().schemaType('hero').documentId('hero')),
-      S.listItem()
         .title('About Page')
         .id('about')
         .child(S.document().schemaType('about').documentId('about')),
@@ -63,18 +59,6 @@ export const deskStructure = (S: StructureBuilder) =>
         .id('footer')
         .child(S.document().schemaType('footer').documentId('footer')),
       S.listItem()
-        .title('Contact Page Hero')
-        .id('contactHero')
-        .child(S.document().schemaType('contactHero').documentId('contactHero')),
-      S.listItem()
-        .title('About Page Hero')
-        .id('aboutHero')
-        .child(S.document().schemaType('aboutHero').documentId('aboutHero')),
-      S.listItem()
-        .title('Content Page Hero')
-        .id('contentHero')
-        .child(S.document().schemaType('contentHero').documentId('contentHero')),
-      S.listItem()
         .title('Content Top Carousel')
         .id('contentTopCarousel')
         .child(S.document().schemaType('carousel').documentId('contentTopCarousel')),
@@ -94,7 +78,6 @@ export const deskStructure = (S: StructureBuilder) =>
         (listItem) =>
           ![
             'headerHero', // This will hide the generic 'Header Hero' type from the main list
-            'hero',
             'about',
             'contactInfo',
             'statistics',
@@ -103,9 +86,6 @@ export const deskStructure = (S: StructureBuilder) =>
             'toolsSection',
             'strategySection',
             'footer',
-            'contactHero',
-            'aboutHero',
-            'contentHero',
             'contentTopCarousel',
             'portfolioItem',
             'servicesManagement',

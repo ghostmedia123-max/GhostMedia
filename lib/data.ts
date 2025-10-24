@@ -168,18 +168,6 @@ export async function getPageBySlug(slug: string) {
     return null;
   }
 }
-export async function getHeroData() {
-  try {
-    const query = groq`*[_type == "hero"][0]{..., logo, subtext}`;
-    const data = await client.fetch<HeroData>(query);
-    // If Sanity returns data, use it. Otherwise, fall back to default.
-    return data || (heroDefaults as unknown as HeroData);
-  } catch (error) {
-    console.error('Failed to fetch hero data from Sanity, falling back to default:', error);
-    // In case of any error (e.g., network failure), return the default content.
-    return heroDefaults as unknown as HeroData;
-  }
-}
 
 export async function getIntroductionData() {
   try {
@@ -230,53 +218,6 @@ export async function getStrategySectionData(): Promise<{ title: string; steps: 
   } catch (error) {
     console.error('Failed to fetch strategy section data:', error);
     return null;
-  }
-}
-
-export async function getContactHeroData() {
-  try {
-    const query = groq`*[_type == "hero" && pageIdentifier == "contact"][0]{
-      ...,
-      ${seoProjection}
-    }`;
-    const data = await client.fetch<HeroData>(query);
-    return data || (heroDefaults as unknown as HeroData);
-  } catch (error) {
-    console.error('Failed to fetch contact hero data:', error);
-    return heroDefaults as unknown as HeroData;
-  }
-}
-
-export async function getAboutHeroData() {
-  try {
-    const query = groq`*[_type == "hero" && pageIdentifier == "about"][0]{
-      ...,
-      ${seoProjection}
-    }`;
-    const data = await client.fetch<HeroData>(query);
-    return data || (heroDefaults as unknown as HeroData);
-  } catch (error) {
-    console.error('Failed to fetch about hero data:', error);
-    return heroDefaults as unknown as HeroData;
-  }
-}
-
-export async function getContentHeroData() {
-  try {
-    const query = groq`*[_type == "hero" && pageIdentifier == "content"][0]{
-      headline,
-      tagline,
-      subtext,
-      backgroundImage,
-      ctaText,
-      ctaLink,
-      ${seoProjection}
-    }`;
-    const data = await client.fetch<HeroData>(query);
-    return data || (heroDefaults as unknown as HeroData);
-  } catch (error) {
-    console.error('Failed to fetch content hero data:', error);
-    return heroDefaults as unknown as HeroData;
   }
 }
 
@@ -449,7 +390,10 @@ export async function getMoreServicesData(): Promise<MoreServicesData | null> {
     const query = groq`*[_type == "servicesManagement"][0]{
       "title": aboutPageSectionTitle,
       "backgroundImage": aboutPageBackgroundImage,
-      "services": aboutPageServices[]->{...}
+      "services": aboutPageServices[]{
+        _type == 'reference' => @->{...},
+        _type != 'reference' => @{...}
+      }
     }`;
     return await client.fetch<MoreServicesData>(query, {}, {cache: 'no-store'});
   } catch (error) {
