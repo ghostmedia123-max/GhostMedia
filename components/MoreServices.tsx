@@ -69,9 +69,9 @@ export default function MoreServices({data}: MoreServicesProps) {
           <Image
             src={urlFor(data.backgroundImage).url()}
             alt={data.backgroundImage.alt || 'More services background'}
-            fill
+            layout="fill"
             className="absolute inset-0 -z-10 h-full w-full object-cover"
-            priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-black opacity-50" />
         </>
