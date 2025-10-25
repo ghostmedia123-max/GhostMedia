@@ -113,19 +113,21 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
                 <motion.div
                   key={service.title}
                   variants={itemVariants}
-                  className="group flex flex-col items-center rounded-xl bg-white/5 p-8 text-center ring-1 ring-white/10 transition-all duration-300 hover:bg-white/10 hover:ring-white/20"
+                  className="group flex items-start gap-x-6 rounded-xl bg-white/5 p-6 ring-1 ring-white/10 transition-all duration-300 hover:bg-white/10 hover:ring-white/20"
                   whileHover={{ y: -8, scale: 1.03 }}
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-blue-600 transition-all duration-300 group-hover:bg-indigo-500 group-hover:shadow-[0_0_20px_rgba(79,70,229,0.8)]">
-                    {service.serviceIcon && iconMap[service.serviceIcon] &&
-                      React.createElement(iconMap[service.serviceIcon], {
-                        className: 'h-8 w-8 text-white',
-                        'aria-hidden': 'true',
-                      })}
+                  {/* Numbered Box */}
+                  {service.serviceNumber && (
+                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-lg bg-blue-600 text-3xl font-bold text-white transition-all duration-300 group-hover:bg-indigo-500 group-hover:shadow-[0_0_20px_rgba(79,70,229,0.8)]">
+                      {service.serviceNumber}
+                    </div>
+                  )}
+                  {/* Text content */}
+                  <div className="flex-grow">
+                    <h3 className="text-xl font-semibold leading-7 text-white">{service.title}</h3>
+                    <p className="mt-1 text-base leading-7 text-gray-400">{service.shortDescription}</p>
                   </div>
-                  <h3 className="mt-6 text-xl font-semibold leading-7 text-white">{service.title}</h3>
-                  <p className="mt-2 text-base leading-7 text-gray-400">{service.shortDescription}</p>
                 </motion.div>
               ))
             ) : (

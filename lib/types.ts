@@ -58,11 +58,12 @@ export interface PortfolioItem {
 }
 
 export interface Service {
-  number: number;
+  _id?: string;
+  number?: number;
   title: string;
   description: string;
   shortDescription?: string;
-  icon?: string;
+  serviceNumber?: number;
   features?: string[];
   serviceIcon?: string;
   ctaText?: string;

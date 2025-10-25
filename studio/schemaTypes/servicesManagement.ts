@@ -47,6 +47,7 @@ export default defineType({
       description: 'A simple list of services for the homepage, with just a title and an icon.',
       of: [
         {
+          name: 'homepageService',
           type: 'object',
           fields: [
             defineField({
@@ -54,6 +55,13 @@ export default defineType({
               title: 'Service Name',
               type: 'string',
               validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'serviceNumber',
+              title: 'Service Number',
+              type: 'number',
+              description: 'The number to display in the square card (e.g., 1, 2).',
+              validation: (Rule) => Rule.integer().positive(),
             }),
             defineField({
               name: 'serviceIcon',
