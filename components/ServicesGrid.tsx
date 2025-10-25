@@ -113,9 +113,7 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
                 <motion.div
                   key={service.title}
                   variants={itemVariants}
-                  className="group flex items-start gap-x-6 rounded-xl bg-white/5 p-6 ring-1 ring-white/10 transition-all duration-300 hover:bg-white/10 hover:ring-white/20"
-                  whileHover={{ y: -8, scale: 1.03 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="group flex items-start gap-x-4 sm:gap-x-6"
                 >
                   {/* Numbered Box */}
                   {service.serviceNumber && (
