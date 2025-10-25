@@ -103,7 +103,7 @@ export default function ServicesGrid({ services, sectionData }: ServicesGridProp
             {sectionData?.title || 'Our Services'}
           </motion.h2>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-5xl">
           <motion.div
             variants={containerVariants}
             className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
